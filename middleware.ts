@@ -1,19 +1,26 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-const isPublicRoute = createRouteMatcher([
-  "/sign-in(.*)",
-  "/signup(.*)",
-  "/login",
-]);
+const isPublicRoute = createRouteMatcher(["/signup(.*)", "/login"]);
 
 export default clerkMiddleware(async (auth, request) => {
   const { userId } = await auth();
+  const url = request.nextUrl.clone();
+  const path = url.pathname;
+
   if (!isPublicRoute(request) && !userId) {
-    const url = request.nextUrl.clone(); // Clone the current URL
-    url.pathname = "/login"; // Set the pathname to absolute "/login"
-    return NextResponse.redirect(url); // Use absolute URL for the redirect
+    if (path !== "/login") {
+      url.pathname = "/login";
+      return NextResponse.redirect(url);
+    }
+  } else if (userId) {
+    if (path === "/login" || path === "/") {
+      url.pathname = "/dashboard";
+      return NextResponse.redirect(url);
+    }
   }
+
+  return NextResponse.next();
 });
 
 export const config = {
