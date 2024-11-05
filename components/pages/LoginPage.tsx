@@ -15,8 +15,6 @@ import { toast } from "sonner";
 type FormValues = {
   email: string;
   password: string;
-  firstName: string;
-  lastName: string;
 };
 
 function LoginPage() {
