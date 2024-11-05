@@ -5,7 +5,7 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 import { useSignIn, useSignUp } from "@clerk/nextjs";
 import { useForm } from "react-hook-form";
-import { loginSchema } from "@/lib/models/loginSchema";
+import { loginSchema } from "@/lib/models/form/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Label } from "@radix-ui/react-label";
 import { Input } from "../ui/input";
@@ -21,6 +21,7 @@ type FormValues = {
 function LoginPage() {
   const { isLoaded, setActive } = useSignUp();
   const { signIn } = useSignIn();
+
   const router = useRouter();
 
   const {
@@ -44,7 +45,7 @@ function LoginPage() {
 
       if (completeSignIn.status === "complete") {
         await setActive({ session: completeSignIn.createdSessionId });
-        router.push("/dashboard");
+        router.push("/dashboard/products");
         toast.success("You logged in!");
       }
     } catch (err: any) {

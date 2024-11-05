@@ -15,7 +15,7 @@ export default clerkMiddleware(async (auth, request) => {
     }
   } else if (userId) {
     if (path === "/login" || path === "/") {
-      url.pathname = "/dashboard";
+      url.pathname = "/dashboard/products";
       return NextResponse.redirect(url);
     }
   }

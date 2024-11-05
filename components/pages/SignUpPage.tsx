@@ -1,5 +1,5 @@
 "use client";
-import { signupSchema } from "@/lib/models/signupSchema";
+import { signupSchema } from "@/lib/models/form/signupSchema";
 import { useSignUp, useUser } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -30,19 +30,19 @@ const SignUpPage = () => {
     resolver: zodResolver(signupSchema),
   });
   const token = useSearchParams().get("__clerk_ticket");
-  // if (!token) {
-  //   return (
-  //     <div className="w-full h-screen flex justify-center items-center">
-  //       <p className="text-center text-[var(--error)] text-lg xl:text-2xl">
-  //         No invitation token found.
-  //       </p>
-  //     </div>
-  //   );
-  // }
+  if (!token) {
+    return (
+      <div className="w-full h-screen flex justify-center items-center">
+        <p className="text-center text-[var(--error)] text-lg xl:text-2xl">
+          No invitation token found.
+        </p>
+      </div>
+    );
+  }
 
   useEffect(() => {
     if (user?.id) {
-      router.push("/dashboard");
+      router.push("/dashboard/products");
     }
   }, [user]);
 
