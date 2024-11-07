@@ -81,7 +81,7 @@ function LoginPage() {
               />
             </div>
             {errors.email && (
-              <p className="text-red-500 text-[10px] md:text-[12px] px-2">
+              <p className="text-[var(--error)] text-[10px] md:text-[12px] px-2">
                 {errors.email.message}
               </p>
             )}
@@ -102,7 +102,7 @@ function LoginPage() {
               />
             </div>
             {errors.password && (
-              <p className="text-red-500 text-[10px] md:text-[12px] px-2">
+              <p className="text-[var(--error)] text-[10px] md:text-[12px] px-2">
                 {errors.password.message}
               </p>
             )}

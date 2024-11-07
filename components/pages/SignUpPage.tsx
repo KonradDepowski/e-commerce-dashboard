@@ -96,7 +96,7 @@ const SignUpPage = () => {
               />
             </div>
             {errors.firstName && (
-              <p className="text-red-500 text-[10px] md:text-[12px] px-2">
+              <p className="text-[var(--error)] text-[10px] md:text-[12px] px-2">
                 {errors.firstName.message}
               </p>
             )}
@@ -116,7 +116,7 @@ const SignUpPage = () => {
               />
             </div>
             {errors.lastName && (
-              <p className="text-red-500 text-[10px] md:text-[12px] px-2">
+              <p className="text-[var(--error)] text-[10px] md:text-[12px] px-2">
                 {errors.lastName.message}
               </p>
             )}
@@ -137,7 +137,7 @@ const SignUpPage = () => {
               />
             </div>
             {errors.password && (
-              <p className="text-red-500 text-[10px] md:text-[12px] px-2">
+              <p className="text-[var(--error)] text-[10px] md:text-[12px] px-2">
                 {errors.password.message}
               </p>
             )}

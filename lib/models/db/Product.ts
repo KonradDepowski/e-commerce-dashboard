@@ -8,8 +8,8 @@ export type productSchemaType = {
   category: "lifestyle" | "football" | "running" | "sneakers";
   sex: "men" | "women" | "unisex";
   price: number;
-  images: Array<string>;
-  offer: boolean;
+  images?: Array<string>;
+  offer?: boolean;
 };
 
 const productSchema = new Schema(

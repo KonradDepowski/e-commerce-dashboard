@@ -4,12 +4,12 @@ import React, { PropsWithChildren } from "react";
 
 const DashboardLayout = ({ children }: PropsWithChildren) => {
   return (
-    <div className="h-screen overflow-hidden">
+    <div className="h-screen flex flex-col ">
       <Header />
-      <main className="flex h-full">
+      <div className="flex flex-1 overflow-hidden">
         <SideBar />
-        <div className="flex-1 overflow-y-auto">{children}</div>
-      </main>
+        <div className="flex-1 overflow-y-auto p-4">{children}</div>
+      </div>
     </div>
   );
 };

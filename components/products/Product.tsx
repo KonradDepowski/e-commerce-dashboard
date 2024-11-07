@@ -8,18 +8,24 @@ const Product = ({ id, name, price, images }: productSchemaType) => {
     <Link href={`/dashboard/products/${id}`}>
       <li
         key={id}
-        className="flex flex-col w-[200px] md:w-[250px] lg:w-[260px] bg-primary rounded-lg pb-1 shadow-2xl relative h-auto"
+        className="flex flex-col w-[200px] md:w-[250px] lg:w-[280px] bg-primary rounded-lg shadow-2xl relative h-[250px] lg:h-[320px] hover:scale-[1.05] transition-all"
       >
-        <div className="h-[120px] md:h-[170px] relative object-cover">
+        <div className="min-h-[65%] relative ">
           <Image
-            className="rounded-lg  object-cover object-center"
+            className="rounded-lg  object-cover object-center "
             src={images?.[0]}
             alt={name}
             fill
           />
         </div>
-        <h2 className="text-lg md:text-xl md:p-2 text-center p-1 ">{name}</h2>
-        <p className="text-lg md:text-xl md:p-2 text-center  ">${price}</p>
+        <div className="min-h-[35%] flex flex-col items-center justify-center gap-1">
+          <h2 className="text-lg md:text-xl  font-bold text-[var(--green-main)] text-center ">
+            {name}
+          </h2>
+          <p className="text-lg md:text-xl text-center  text-[var(--dark-300)] ">
+            ${price}
+          </p>
+        </div>
       </li>
     </Link>
   );
