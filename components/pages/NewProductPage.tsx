@@ -3,21 +3,28 @@ import { createProduct } from "@/lib/actions/createProduct";
 
 import { Product } from "@/lib/models/form/productSchema";
 import ProductForm from "../forms/ProductForm";
+import { updateOfferProduct } from "@/lib/actions/updateOfferProduct";
 
 const NewProductPage = () => {
   const productHandler = async (data: Product, urls: string[]) => {
+    console.log(data);
+
     const productData = {
       ...data,
       images: urls,
       price: Number(data.price),
-      offer: false,
+      offer: data.offer,
     };
 
     try {
-      await createProduct(productData);
-    } catch (error) {
-      console.error("Failed to create product:", error);
+      if (data.offer) {
+        await updateOfferProduct();
+      }
+    } catch (updateError) {
+      console.error("Failed to update offer product:", updateError);
     }
+
+    await createProduct(productData);
   };
 
   return (
@@ -26,6 +33,7 @@ const NewProductPage = () => {
         Create new product
       </h1>
       <ProductForm
+        offerValue={false}
         nameValue=""
         categoryValue={undefined}
         sexValue={undefined}

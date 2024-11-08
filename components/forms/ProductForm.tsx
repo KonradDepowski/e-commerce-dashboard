@@ -22,17 +22,17 @@ import {
   uploadBytesResumable,
 } from "@firebase/storage";
 import { app } from "@/lib/database/firebase";
-import { useRouter } from "next/navigation";
-import { FaTrashAlt } from "react-icons/fa";
 import { updateProductSchema } from "@/lib/models/form/updateProductSchema";
 
 import Loader from "../Loader/Loader";
 import ImagesList from "./ImagesList";
+import { Checkbox } from "../ui/checkbox";
 type ProdutFormProps = {
   nameValue: string;
   categoryValue: Category | undefined;
   sexValue: Sex | undefined;
   priceValue: string;
+  offerValue: boolean;
   handleProduct: (data: Product, urls: string[]) => {};
   deleteImage?: (url: string) => void;
   dbImages?: string[];
@@ -45,6 +45,7 @@ const ProductForm = ({
   categoryValue,
   sexValue,
   priceValue,
+  offerValue,
   handleProduct,
   deleteImage,
   dbImages,
@@ -53,7 +54,7 @@ const ProductForm = ({
   const [imageFileUrls, setImageFileUrls] = useState<string[]>([]);
   const [images, setImages] = useState<string[]>([]);
   const storage = getStorage(app);
-  const router = useRouter();
+
   const {
     handleSubmit,
     register,
@@ -65,6 +66,7 @@ const ProductForm = ({
       category: categoryValue,
       sex: sexValue,
       images: dbImages,
+      offer: offerValue,
     },
   });
 
@@ -97,8 +99,6 @@ const ProductForm = ({
       handleProduct(data, urls);
     } catch (error) {
       console.error("Error uploading files:", error);
-    } finally {
-      router.push("/dashboard/products");
     }
   };
 
@@ -188,6 +188,7 @@ const ProductForm = ({
               </p>
             )}
           </div>
+
           <div>
             <Input
               id="price"
@@ -203,6 +204,20 @@ const ProductForm = ({
               </p>
             )}
           </div>
+        </div>
+        <div className="flex gap-2 items-center">
+          <Checkbox
+            defaultChecked={offerValue}
+            onCheckedChange={(value: boolean) => setValue("offer", value)}
+            className="lg:w-5 lg:h-5"
+            id="offer"
+          />
+          <Label
+            className="text-[var(--dark-600)] lg:text-[16px] "
+            htmlFor="offer "
+          >
+            Deal of the day
+          </Label>
         </div>
         <div className="w-full flex ">
           <Input
@@ -220,7 +235,7 @@ const ProductForm = ({
             className="border-[var(--dark-500)] border w-full flex  items-center px-2 h-9  lg:h-12 rounded-lg cursor-pointer"
             htmlFor="images"
           >
-            <span>Select Images</span>
+            <span className="text-[var(--dark-600)]">Select Images</span>
           </Label>
           {errors.images && (
             <p className="text-[var(--error)] text-[10px] sm:text-sm">

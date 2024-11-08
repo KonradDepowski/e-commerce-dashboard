@@ -11,6 +11,7 @@ export const updateProductSchema = z.object({
   sex: z.enum(sex, { message: "Please choose sex" }),
   price: z.string().nonempty({ message: "Enter a price" }),
   images: z.any(),
+  offer: z.boolean(),
 });
 
 export type Product = z.infer<typeof updateProductSchema>;

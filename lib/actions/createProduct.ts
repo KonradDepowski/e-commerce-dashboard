@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../database/database";
 import Product, { productSchemaType } from "../models/db/Product";
+import { redirect } from "next/navigation";
 
 export const createProduct = async (data: productSchemaType) => {
   try {
@@ -16,8 +17,9 @@ export const createProduct = async (data: productSchemaType) => {
       throw new Error("Could not fetch all products");
     }
     revalidatePath("/dashboard/products");
-    return products;
   } catch (error: any) {
     throw new Error(error.message);
+  } finally {
+    redirect("/dashboard/products");
   }
 };

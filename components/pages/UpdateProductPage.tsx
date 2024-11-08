@@ -5,6 +5,7 @@ import ProductForm from "../forms/ProductForm";
 import { Product } from "@/lib/models/form/productSchema";
 import Loader from "../Loader/Loader";
 import { updateProduct } from "@/lib/actions/updateProduct";
+import { updateOfferProduct } from "@/lib/actions/updateOfferProduct";
 
 const UpdateProductPage = ({ params }: { params: { id: string } }) => {
   const [product, setProduct] = useState<Product | null>(null); // Set initial state to null
@@ -29,13 +30,18 @@ const UpdateProductPage = ({ params }: { params: { id: string } }) => {
       ...data,
       images: imagesUrls,
       price: Number(data.price),
+      offer: data.offer,
     };
 
     try {
-      await updateProduct(productData, params.id);
-    } catch (error) {
-      console.error("Failed to create product:", error);
+      if (data.offer) {
+        await updateOfferProduct();
+      }
+    } catch (updateError) {
+      console.error("Failed to update offer product:", updateError);
     }
+
+    await updateProduct(productData, params.id);
   };
 
   const deleteImageHandler = (url: string) => {
@@ -52,6 +58,7 @@ const UpdateProductPage = ({ params }: { params: { id: string } }) => {
         categoryValue={product.category}
         sexValue={product.sex}
         priceValue={product.price}
+        offerValue={product.offer}
         dbImages={images}
         deleteImage={deleteImageHandler}
         handleProduct={handleProduct}

@@ -18,6 +18,7 @@ export const productSchema = z.object({
   sex: z.enum(sex, { message: "Please choose sex" }),
   price: z.string().nonempty({ message: "Enter a price" }),
   images: z.any().refine((files) => files, { message: "Image is required." }),
+  offer: z.boolean(),
   // .refine(
   //   (files) => files?.[0]?.size <= MAX_FILE_SIZE,
   //   `Max file size is 5MB.`
