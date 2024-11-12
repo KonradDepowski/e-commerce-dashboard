@@ -1,7 +1,7 @@
-import React from "react";
+import OrderDetailPage from "@/components/pages/OrderDetailPage";
 
 const OrderDetail = ({ params }: { params: { id: string } }) => {
-  return <div>{params.id}</div>;
+  return <OrderDetailPage params={params} />;
 };
 
 export default OrderDetail;

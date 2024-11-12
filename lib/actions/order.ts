@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../database/database";
 import Order, { orderSchemaType } from "../models/db/Order";
 import { fetchProduct } from "./product";
@@ -42,6 +43,7 @@ export const fetchSingleOrder = async (orderId: string) => {
       deliveryData: order.deliveryData,
       totalAmount: order.totalAmount,
       date: order.createdAt,
+      status: order.status,
     });
 
     return productsData;
@@ -64,6 +66,21 @@ export const fetchOrders = async () => {
     }
 
     return orders;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+export const updateOrderStatus = async (id: string, status: string) => {
+  try {
+    const dbConnection = await connectToDatabase();
+
+    if (!dbConnection) {
+      throw new Error("Failed to connect to the database");
+    }
+
+    await Order.findOneAndUpdate({ _id: id }, { status: status });
+    revalidatePath("/dashboard/orders");
   } catch (error: any) {
     throw new Error(error.message);
   }
