@@ -1,4 +1,4 @@
-import { fetchProducts } from "@/lib/actions/fetchProducts";
+import { fetchProducts } from "@/lib/actions/product";
 import React, { Suspense } from "react";
 import Product from "../products/Product";
 import Link from "next/link";

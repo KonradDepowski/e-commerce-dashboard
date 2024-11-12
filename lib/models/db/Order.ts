@@ -9,6 +9,7 @@ export type orderSchemaType = {
   createdAt: Date;
   totalAmount: number;
   deliveryData: Object;
+  status: string;
 };
 
 const orderSchema = new Schema({
@@ -31,6 +32,10 @@ const orderSchema = new Schema({
   },
   deliveryData: {
     type: Object,
+    required: true,
+  },
+  status: {
+    type: String,
     required: true,
   },
 });

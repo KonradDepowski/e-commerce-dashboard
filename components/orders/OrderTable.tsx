@@ -12,19 +12,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import {
   Table,
@@ -38,129 +26,17 @@ import Link from "next/link";
 import { DataTablePagination } from "../orders/data-table-pagination";
 import { DataTableFacetedFilter } from "../orders/data-table-faceted-filter";
 
-const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    orderID: "ken99@yahoo.com",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    orderID: "Abe45@gmail.com",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    orderID: "Monserrat44@gmail.com",
-  },
-  {
-    id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    orderID: "Silas22@gmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    orderID: "carmella@hotmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    orderID: "carmella@hotmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    orderID: "carmella@hotmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    orderID: "carmella@hotmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    orderID: "carmella@hotmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    orderID: "carmella@hotmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    orderID: "carmella@hotmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    orderID: "carmella@hotmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    orderID: "carmella@hotmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    orderID: "carmella@hotmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    orderID: "carmella@hotmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    orderID: "carmella@hotmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    orderID: "carmella@hotmail.com",
-  },
-];
-
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  orderID: string;
-};
-
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Object>[] = [
   {
     accessorKey: "_id",
     header: "OrderID",
     cell: ({ row }) => <div className="lowercase">{row.getValue("_id")}</div>,
   },
   {
-    accessorKey: "buyerId",
+    accessorKey: "status",
     header: "Status",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("buyerId")}</div>
+      <div className="capitalize">{row.getValue("status")}</div>
     ),
   },
 
@@ -169,8 +45,8 @@ export const columns: ColumnDef<Payment>[] = [
     header: "Date",
     cell: ({ row }) => (
       <div className="lowercase">
-        {row.getValue("createdAt").toLocaleDateString()}
-        {row.getValue("createdAt").toLocaleTimeString()}
+        {(row.getValue("createdAt") as Date).toLocaleDateString()}
+        {(row.getValue("createdAt") as Date).toLocaleTimeString()}
       </div>
     ),
   },
@@ -180,7 +56,6 @@ export const columns: ColumnDef<Payment>[] = [
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("totalAmount"));
 
-      // Format the amount as a dollar amount
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
@@ -220,13 +95,13 @@ export default function OrderTable({ data }: { data: Array<Object> }) {
   });
 
   return (
-    <div className="w-full ">
+    <div className="w-full max-w-[1500px] m-auto">
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter orderIDs..."
-          value={(table.getColumn("orderID")?.getFilterValue() as string) ?? ""}
+          value={(table.getColumn("_id")?.getFilterValue() as number) ?? ""}
           onChange={(event) =>
-            table.getColumn("orderID")?.setFilterValue(event.target.value)
+            table.getColumn("_id")?.setFilterValue(event.target.value)
           }
           className="max-w-sm mr-5"
         />
@@ -235,8 +110,8 @@ export default function OrderTable({ data }: { data: Array<Object> }) {
             column={table.getColumn("status")}
             title="Status"
             options={[
-              { label: "success", value: "success" },
-              { label: "failed", value: "failed" },
+              { label: "paid", value: "paid" },
+              { label: "completed", value: "completed" },
             ]}
           />
         )}
@@ -269,7 +144,7 @@ export default function OrderTable({ data }: { data: Array<Object> }) {
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell className="px-5 py-4" key={cell.id}>
-                      <Link href={cell.id}>
+                      <Link href={`/dashboard/orders/${row.getValue("_id")}`}>
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()

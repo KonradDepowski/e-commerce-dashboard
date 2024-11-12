@@ -1,6 +1,6 @@
 import React from "react";
 import OrderTable from "../orders/OrderTable";
-import { fetchOrders } from "@/lib/actions/fetchOrders";
+import { fetchOrders } from "@/lib/actions/order";
 
 const OrdersPage = async () => {
   const orders = await fetchOrders();

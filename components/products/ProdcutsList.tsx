@@ -1,4 +1,4 @@
-import { fetchProducts } from "@/lib/actions/fetchProducts";
+import { fetchProducts } from "@/lib/actions/product";
 import React from "react";
 import Product from "./Product";
 
@@ -10,7 +10,7 @@ const ProdcutsList = async () => {
         <Product
           offer={product.offer}
           key={product._id}
-          id={product._id}
+          id={product._id.toString()}
           sex={product.sex}
           name={product.name}
           category={product.category}

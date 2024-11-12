@@ -1,11 +1,13 @@
 "use client";
-import { fetchProduct } from "@/lib/actions/fetchProduct";
+import {
+  fetchProduct,
+  updateOfferProduct,
+  updateProduct,
+} from "@/lib/actions/product";
 import React, { useEffect, useState } from "react";
 import ProductForm from "../forms/ProductForm";
 import { Product } from "@/lib/models/form/productSchema";
 import Loader from "../Loader/Loader";
-import { updateProduct } from "@/lib/actions/updateProduct";
-import { updateOfferProduct } from "@/lib/actions/updateOfferProduct";
 
 const UpdateProductPage = ({ params }: { params: { id: string } }) => {
   const [product, setProduct] = useState<Product | null>(null); // Set initial state to null

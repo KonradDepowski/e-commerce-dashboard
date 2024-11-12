@@ -1,9 +1,8 @@
 "use client";
-import { createProduct } from "@/lib/actions/createProduct";
+import { createProduct, updateOfferProduct } from "@/lib/actions/product";
 
 import { Product } from "@/lib/models/form/productSchema";
 import ProductForm from "../forms/ProductForm";
-import { updateOfferProduct } from "@/lib/actions/updateOfferProduct";
 
 const NewProductPage = () => {
   const productHandler = async (data: Product, urls: string[]) => {
