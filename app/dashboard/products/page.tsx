@@ -1,8 +1,11 @@
 import ProductsPage from "@/components/pages/ProductsPage";
-import React from "react";
 
-const Products = () => {
-  return <ProductsPage />;
+const Products = ({
+  searchParams,
+}: {
+  searchParams: { [page: string]: string | undefined };
+}) => {
+  return <ProductsPage searchParams={searchParams} />;
 };
 
 export default Products;

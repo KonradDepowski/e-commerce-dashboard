@@ -6,7 +6,12 @@ import { FaPlus } from "react-icons/fa6";
 import ProdcutsList from "../products/ProdcutsList";
 import Loader from "../Loader/Loader";
 
-const ProductsPage = async () => {
+const ProductsPage = async ({
+  searchParams,
+}: {
+  searchParams: { [page: string]: string | undefined };
+}) => {
+  let page = searchParams?.page || 1;
   return (
     <section className="p-4 w-full">
       <ul className="flex flex-wrap justify-center md:justify-start gap-4">
@@ -16,7 +21,7 @@ const ProductsPage = async () => {
           </li>
         </Link>
         <Suspense fallback={<Loader />}>
-          <ProdcutsList />
+          <ProdcutsList page={page} />
         </Suspense>
       </ul>
     </section>

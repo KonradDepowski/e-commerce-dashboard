@@ -23,19 +23,24 @@ export const fetchProduct = async (id: string) => {
   }
 };
 
-export const fetchProducts = async () => {
+export const fetchProducts = async (page: string | number, limit: number) => {
   try {
     const dbConnection = await connectToDatabase();
 
     if (!dbConnection) {
       throw new Error("Failed to connect to the database");
     }
-    const products = Product.find();
+    const skipAmount = (Number(page) - 1) * limit;
+    const productCount = await Product.countDocuments();
+    const products = Product.find().skip(skipAmount).limit(limit);
     if (!products) {
       throw new Error("Could not fetch all products");
     }
 
-    return products;
+    return {
+      products,
+      totalPages: Math.ceil(productCount / limit),
+    };
   } catch (error: any) {
     throw new Error(error.message);
   }
