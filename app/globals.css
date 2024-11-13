@@ -73,3 +73,56 @@ body {
 #scroll::-webkit-scrollbar {
   display: none;
 }
+
+/* PROFILE STYLES */
+
+.cl-internal-5twwv2 {
+  display: none;
+}
+
+.cl-profileSection__emailAddresses {
+  display: none;
+}
+
+.cl-profileSection__connectedAccounts {
+  display: none;
+}
+
+.cl-profileSection__activeDevices {
+  display: none;
+}
+
+.cl-profileSection__danger {
+  display: none;
+}
+
+.cl-internal-y9wavj {
+  background-color: hsl(216, 39%, 14%);
+}
+
+.cl-navbarMobileMenuRow {
+  display: none;
+}
+
+.cl-internal-d3snkr {
+  display: none;
+}
+
+.cl-rootBox {
+  width: 95%;
+  max-width: 40rem;
+}
+
+.cl-card {
+  width: 100%;
+  margin: 0;
+  max-width: 40rem;
+}
+
+.cl-internal-60laz0 {
+  display: none;
+}
+
+.cl-internal-b3fm6y {
+  display: none;
+}

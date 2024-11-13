@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { ThemeToggle } from "../theme/ThemeToggle";
-import { SignOutButton } from "../buttons/SignOutButton";
-import { UserButton } from "@clerk/nextjs";
 import NarrowNav from "./NarrowNav";
+import Link from "next/link";
+import Avatar from "../avatar/Avatar";
 
 const Header = () => {
   return (
@@ -12,7 +12,7 @@ const Header = () => {
       </h3>
       <div className="gap-4 hidden md:flex px-3">
         <ThemeToggle />
-        <UserButton />
+        <Avatar />
       </div>
       <NarrowNav />
     </div>

@@ -152,7 +152,7 @@ const ProductForm = ({
               onValueChange={(value: Category) => setValue("category", value)}
               defaultValue={categoryValue}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-12">
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
               <SelectContent>
@@ -173,7 +173,7 @@ const ProductForm = ({
               defaultValue={sexValue}
               onValueChange={(value: Sex) => setValue("sex", value)}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-12">
                 <SelectValue placeholder="Sex" />
               </SelectTrigger>
               <SelectContent>

@@ -6,8 +6,6 @@ import ProductForm from "../forms/ProductForm";
 
 const NewProductPage = () => {
   const productHandler = async (data: Product, urls: string[]) => {
-    console.log(data);
-
     const productData = {
       ...data,
       images: urls,
