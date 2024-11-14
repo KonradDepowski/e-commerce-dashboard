@@ -38,6 +38,7 @@ body {
     --googleBtn: #dd5144;
     --fbBtn: #4267b2;
     --error: rgb(223, 0, 0);
+    --error-hover: rgb(170, 5, 5);
   }
 
   .dark {
@@ -59,6 +60,7 @@ body {
     --googleBtn: transparent;
     --fbBtn: transparent;
     --error: rgb(225, 3, 3);
+    --error-hover: rgb(170, 5, 5);
   }
 }
 @layer base {

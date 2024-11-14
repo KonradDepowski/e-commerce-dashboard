@@ -1,26 +1,36 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { authMiddleware } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
-const isPublicRoute = createRouteMatcher(["/signup(.*)", "/login"]);
+export default authMiddleware({
+  publicRoutes: ["/signup", "/login"],
 
-export default clerkMiddleware(async (auth, request) => {
-  const { userId } = await auth();
-  const url = request.nextUrl.clone();
-  const path = url.pathname;
+  afterAuth(auth, req) {
+    const { userId, orgRole } = auth;
+    const url = req.nextUrl.clone();
+    const path = url.pathname;
 
-  if (!isPublicRoute(request) && !userId) {
-    if (path !== "/login") {
+    // Prevent redirect loops by bypassing redirects if already on login or signup
+    if (!userId && path === "/signup") {
+      return NextResponse.next(); // Allow access to /signup without redirecting
+    }
+
+    if (!userId && path !== "/login") {
       url.pathname = "/login";
       return NextResponse.redirect(url);
     }
-  } else if (userId) {
-    if (path === "/login" || path === "/") {
+
+    if (userId && (path === "/login" || path === "/")) {
       url.pathname = "/dashboard/products";
       return NextResponse.redirect(url);
     }
-  }
 
-  return NextResponse.next();
+    if (orgRole === "org:member" && path === "/dashboard/users") {
+      url.pathname = "/dashboard/products";
+      return NextResponse.redirect(url);
+    }
+
+    return NextResponse.next(); // Default to proceed if none of the conditions match
+  },
 });
 
 export const config = {
