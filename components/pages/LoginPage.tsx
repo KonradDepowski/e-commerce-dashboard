@@ -45,7 +45,7 @@ function LoginPage() {
 
       if (completeSignIn.status === "complete") {
         await setActive({ session: completeSignIn.createdSessionId });
-        router.push("/dashboard/products");
+        router.push("/dashboard");
         toast.success("You logged in!");
       }
     } catch (err: any) {

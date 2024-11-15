@@ -1,15 +1,34 @@
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
 
+export type productsIdsType = {
+  id: string;
+  size: string;
+  quantity: number;
+};
+
 export type orderSchemaType = {
   _id?: string;
   id: string;
-  productsIds: Object;
+  productsIds: Array<productsIdsType>;
   buyerId: string;
+  buyerAvatar: string;
   createdAt: Date;
   totalAmount: number;
-  deliveryData: Object;
+  deliveryData: DeliveryDataType;
   status: string;
+};
+
+export type DeliveryDataType = {
+  country: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  street: string;
+  houseNumber: number;
+  postalCode: string;
+  town: string;
+  phone: number;
 };
 
 const orderSchema = new Schema({
@@ -21,6 +40,10 @@ const orderSchema = new Schema({
     required: true,
   },
   buyerId: {
+    type: String,
+    required: true,
+  },
+  buyerAvatar: {
     type: String,
     required: true,
   },

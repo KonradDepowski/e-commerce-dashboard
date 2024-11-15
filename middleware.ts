@@ -18,6 +18,13 @@ export default authMiddleware({
       url.pathname = "/login";
       return NextResponse.redirect(url);
     }
+    if (
+      orgRole === "org:member" &&
+      (path === "/login" || path === "/dashboard")
+    ) {
+      url.pathname = "/dashboard/products";
+      return NextResponse.redirect(url);
+    }
 
     if (userId && (path === "/login" || path === "/")) {
       url.pathname = "/dashboard/products";

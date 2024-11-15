@@ -8,6 +8,14 @@ const SideBar = () => {
 
   return (
     <div className="p-3 flex-col  border-r-2 border-[var(--dark-600)] hidden md:flex w-[140px]  xl:w-[200px] gap-1">
+      {admin && (
+        <Link
+          className="text-lg   hover:text-[var(--link-hover-gray)] "
+          href="/dashboard"
+        >
+          Dashboard
+        </Link>
+      )}
       <Link
         className="  text-lg  hover:text-[var(--link-hover-gray)] "
         href="/dashboard/products"
