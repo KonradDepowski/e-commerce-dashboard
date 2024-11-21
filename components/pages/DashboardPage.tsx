@@ -10,14 +10,14 @@ import {
   fetchYearSoldProducts,
 } from "@/lib/actions/dashboard";
 import { PiSneakerLight } from "react-icons/pi";
+import OverViewContainer from "../dashobard/OverViewContainer";
 
 export default async function DashboardPage() {
   const totalRevenue = await fetchYearRevenue();
   const usersCount = await fetchAllUsersCount();
   const productsCount = await fetchAllProductsCount();
   const soldYearProducts = await fetchYearSoldProducts();
-  const monthlyRevenue = await fetchMonthRevenue();
-
+  const year = new Date().getFullYear();
   return (
     <>
       <div className=" flex-col flex">
@@ -49,7 +49,7 @@ export default async function DashboardPage() {
                   <CardContent>
                     <div className="text-2xl font-bold">${totalRevenue}</div>
                     <p className="text-xs  mt-1 text-[var(--dark-500)]">
-                      this year
+                      this year {year}
                     </p>
                   </CardContent>
                 </Card>
@@ -88,7 +88,7 @@ export default async function DashboardPage() {
                   <CardContent>
                     <div className="text-2xl font-bold">{soldYearProducts}</div>
                     <p className="text-xs  mt-1 text-[var(--dark-500)]">
-                      this year
+                      this year {year}
                     </p>
                   </CardContent>
                 </Card>
@@ -119,14 +119,7 @@ export default async function DashboardPage() {
                 </Card>
               </div>
               <div className="grid gap-0 md:gap-4 md:grid-cols-2 lg:grid-cols-7">
-                <Card className="col-span-4">
-                  <CardHeader>
-                    <CardTitle>Overview</CardTitle>
-                  </CardHeader>
-                  <CardContent className="pl-0">
-                    <Overview data={monthlyRevenue} />
-                  </CardContent>
-                </Card>
+                <OverViewContainer />
                 <Card className="col-span-3 mt-4 md:mt-0">
                   <CardHeader>
                     <CardTitle>Recent Sales</CardTitle>

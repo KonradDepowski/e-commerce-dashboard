@@ -28,6 +28,12 @@ const SideBar = () => {
       >
         Orders
       </Link>
+      <Link
+        className="  text-lg  hover:text-[var(--link-hover-gray)] "
+        href="/dashboard/discounts"
+      >
+        Discounts
+      </Link>
       {admin && (
         <Link
           className="text-lg   hover:text-[var(--link-hover-gray)] "

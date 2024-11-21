@@ -5,10 +5,11 @@ import Product from "../models/db/Product";
 import User from "../models/db/User";
 import { fetchOrders } from "./order";
 
-export const fetchYearOrders = async () => {
+export const fetchYearOrders = async (year?: Number) => {
   try {
     const orders = await fetchOrders();
-    const thisYear = new Date().getFullYear();
+    const thisYear = year ? year : new Date().getFullYear();
+
     const thisYearOrders = orders.filter((item) => {
       const orderYear = item.createdAt.getFullYear();
       return orderYear === thisYear;
@@ -92,7 +93,7 @@ export const fetchYearSoldProducts = async () => {
   } catch (error) {}
 };
 
-export const fetchMonthRevenue = async () => {
+export const fetchMonthRevenue = async (year: Number) => {
   const data = [
     {
       id: 1,
@@ -157,7 +158,8 @@ export const fetchMonthRevenue = async () => {
   ];
 
   try {
-    const thisYearOrders = await fetchYearOrders();
+    const thisYearOrders = await fetchYearOrders(year);
+
     thisYearOrders.forEach((item) => {
       data.filter((it) => {
         if (it.id === item.createdAt.getMonth()) {
