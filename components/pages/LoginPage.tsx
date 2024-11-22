@@ -50,7 +50,7 @@ function LoginPage() {
         typeof error === "object" &&
         error !== null &&
         "errors" in error &&
-        Array.isArray((error as any).errors)
+        Array.isArray(error.errors)
       ) {
         const errorsArray = (error as { errors: { message: string }[] }).errors;
 
