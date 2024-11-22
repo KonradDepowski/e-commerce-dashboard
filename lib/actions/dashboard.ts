@@ -5,7 +5,7 @@ import Product from "../models/db/Product";
 import User from "../models/db/User";
 import { fetchOrders } from "./order";
 
-export const fetchYearOrders = async (year?: Number) => {
+export const fetchYearOrders = async (year?: number) => {
   try {
     const orders = await fetchOrders();
     const thisYear = year ? year : new Date().getFullYear();
@@ -124,7 +124,7 @@ export const fetchYearSoldProducts = async () => {
   }
 };
 
-export const fetchMonthRevenue = async (year: Number) => {
+export const fetchMonthRevenue = async (year: number) => {
   const data = [
     {
       id: 1,

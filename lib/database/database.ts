@@ -7,7 +7,9 @@ type CachedMongoose = {
 
 const MONGO_URI = process.env.MONGO_URI;
 
-const cached: CachedMongoose = (global as any).mongoose || {
+const cached: CachedMongoose = (
+  globalThis as typeof globalThis & { mongoose?: CachedMongoose }
+).mongoose || {
   conn: null,
   promise: null,
 };

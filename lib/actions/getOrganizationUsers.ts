@@ -9,7 +9,7 @@ export type OrganizationType = {
   role_name: string;
   permissions: Array<unknown>;
   createdAt: number;
-  update_at: Number;
+  update_at: number;
   organization: object;
   public_user_data: OrganiztionMemebersType;
 };

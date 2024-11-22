@@ -20,7 +20,7 @@ export const createInvitation = async (
     if (!response) {
       throw new Error("Could not send invitation");
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     if (typeof error === "object" && error !== null && "message" in error) {
       throw new Error(`Failed to create invitation ${error.message}`);
     }

@@ -29,6 +29,11 @@ const SignUpPage = () => {
   } = useForm<FormValues>({
     resolver: zodResolver(signupSchema),
   });
+  useEffect(() => {
+    if (user?.id) {
+      router.push("/dashboard/products");
+    }
+  }, [user]);
   const token = useSearchParams().get("__clerk_ticket");
   if (!token) {
     return (
@@ -42,12 +47,6 @@ const SignUpPage = () => {
   if (!user) {
     return null;
   }
-
-  useEffect(() => {
-    if (user?.id) {
-      router.push("/dashboard/products");
-    }
-  }, [user]);
 
   const handleSubmitHandler = async (data: FormValues) => {
     if (!isLoaded) return;
@@ -72,7 +71,7 @@ const SignUpPage = () => {
         typeof error === "object" &&
         error !== null &&
         "errors" in error &&
-        Array.isArray((error as any).errors)
+        Array.isArray(error.errors)
       ) {
         const errorsArray = (error as { errors: { message: string }[] }).errors;
 

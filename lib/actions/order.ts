@@ -11,7 +11,7 @@ export type productsType = {
   sex: "unisex" | "men" | "women";
   price: string;
   offer: boolean;
-  images?: any;
+  images?: string[];
   size: string;
   quantity: number;
 };

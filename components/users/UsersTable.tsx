@@ -120,8 +120,10 @@ const UsersTable = ({ data }: { data: OrganiztionMemebersType[] }) => {
     try {
       await createInvitation(userId!, email);
       toast.success("Invitation send!");
-    } catch (error) {
-      toast.error("Could not send invitation");
+    } catch (error: unknown) {
+      if (typeof error === "object" && error !== null && "message" in error) {
+        toast.error(error.message as string);
+      }
     }
   };
 

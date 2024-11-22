@@ -2,11 +2,10 @@ import Image from "next/image";
 
 import Link from "next/link";
 import { productSchemaType } from "@/lib/models/db/Product";
+import defaultImage from "./../../public/product.png";
 
 const Product = ({ id, name, price, images, offer }: productSchemaType) => {
-  const image = require("./../../public/product.png");
-
-  const imageUrl = images?.[0] ? images?.[0] : image;
+  const imageUrl = images?.[0] ? images[0] : defaultImage;
 
   return (
     <Link href={`/dashboard/products/${id}`}>
