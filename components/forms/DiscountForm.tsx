@@ -8,7 +8,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addNewDiscountCode } from "@/lib/actions/discount";
 import { toast } from "sonner";
-import { log } from "console";
 
 const DiscountForm = () => {
   const {

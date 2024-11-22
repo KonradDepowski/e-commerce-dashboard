@@ -4,7 +4,6 @@ import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../database/database";
 import Discount from "../models/db/Discount";
 import { Discount as DiscountType } from "../models/form/discountSchema";
-import { log } from "console";
 
 export const fetchDiscountCodes = async () => {
   try {

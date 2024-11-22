@@ -1,6 +1,4 @@
-import { fetchProducts } from "@/lib/actions/product";
 import React, { Suspense } from "react";
-import Product from "../products/Product";
 import Link from "next/link";
 import { FaPlus } from "react-icons/fa6";
 import ProdcutsList from "../products/ProdcutsList";

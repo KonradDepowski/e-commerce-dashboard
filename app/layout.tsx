@@ -3,7 +3,6 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
-import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 export const metadata: Metadata = {
   title: "Create Next App",

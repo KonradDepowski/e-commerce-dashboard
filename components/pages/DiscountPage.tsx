@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  addNewDiscountCode,
-  deleteDiscountCode,
-  fetchDiscountCodes,
-} from "@/lib/actions/discount";
+import { fetchDiscountCodes } from "@/lib/actions/discount";
 import DiscountForm from "../forms/DiscountForm";
 
 import DeleteDiscount from "../buttons/DeleteDiscount";

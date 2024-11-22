@@ -14,7 +14,7 @@ import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Product, productSchema } from "@/lib/models/form/productSchema";
-import { lazy, ReactNode, Suspense, useEffect, useState } from "react";
+import { ReactNode, Suspense, useEffect, useState } from "react";
 import {
   getDownloadURL,
   getStorage,

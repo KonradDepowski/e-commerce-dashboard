@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-
 import { useRouter } from "next/navigation";
 import { useSignIn, useSignUp } from "@clerk/nextjs";
 import { useForm } from "react-hook-form";
@@ -21,9 +20,7 @@ type FormValues = {
 function LoginPage() {
   const { isLoaded, setActive } = useSignUp();
   const { signIn } = useSignIn();
-
   const router = useRouter();
-
   const {
     handleSubmit,
     register,

@@ -1,7 +1,6 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { ThemeToggle } from "../theme/ThemeToggle";
 import NarrowNav from "./NarrowNav";
-import Link from "next/link";
 import Avatar from "../avatar/Avatar";
 
 const Header = () => {

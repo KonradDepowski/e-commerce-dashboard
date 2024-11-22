@@ -1,11 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import { Overview } from "../dashobard/OverView";
+import { Tabs, TabsContent } from "../ui/tabs";
 import { RecentSales } from "../dashobard/RecentSales";
 import {
   fetchAllProductsCount,
   fetchAllUsersCount,
-  fetchMonthRevenue,
   fetchYearRevenue,
   fetchYearSoldProducts,
 } from "@/lib/actions/dashboard";
