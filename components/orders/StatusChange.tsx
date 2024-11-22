@@ -19,7 +19,9 @@ const StatusChange = ({
   const changeValueHandler = async (value: string) => {
     try {
       await updateOrderStatus(orderId, value);
-    } catch (error) {}
+    } catch (error: unknown) {
+      console.log(error);
+    }
   };
   return (
     <Select onValueChange={changeValueHandler} defaultValue={defaultValue}>

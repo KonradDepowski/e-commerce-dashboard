@@ -39,6 +39,9 @@ const SignUpPage = () => {
       </div>
     );
   }
+  if (!user) {
+    return null;
+  }
 
   useEffect(() => {
     if (user?.id) {
@@ -64,8 +67,19 @@ const SignUpPage = () => {
         await setActive({ session: signUpAttempt.createdSessionId });
         toast.success("Successfully signed up!");
       }
-    } catch (err: any) {
-      toast.error(err.errors[0].message);
+    } catch (error: unknown) {
+      if (
+        typeof error === "object" &&
+        error !== null &&
+        "errors" in error &&
+        Array.isArray((error as any).errors)
+      ) {
+        const errorsArray = (error as { errors: { message: string }[] }).errors;
+
+        if (errorsArray.length > 0) {
+          toast.error(errorsArray[0].message);
+        }
+      }
     }
   };
   return (

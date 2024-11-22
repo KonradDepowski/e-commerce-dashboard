@@ -9,7 +9,7 @@ const ProductsPage = async ({
 }: {
   searchParams: { [page: string]: string | undefined };
 }) => {
-  let page = searchParams?.page || 1;
+  const page = searchParams?.page || 1;
   return (
     <section className="p-4 w-full">
       <ul className="flex flex-wrap justify-center md:justify-start gap-4">

@@ -2,8 +2,27 @@
 
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../database/database";
-import Order, { orderSchemaType } from "../models/db/Order";
+import Order, { DeliveryDataType, orderSchemaType } from "../models/db/Order";
 import { fetchProduct } from "./product";
+
+export type productsType = {
+  name: string;
+  category: "lifestyle" | "sneakers" | "football" | "running";
+  sex: "unisex" | "men" | "women";
+  price: string;
+  offer: boolean;
+  images?: any;
+  size: string;
+  quantity: number;
+};
+
+export type productDataType = {
+  products: productsType[];
+  deliveryData: DeliveryDataType;
+  totalAmount: number;
+  date: Date;
+  status: string;
+};
 
 export const fetchSingleOrder = async (orderId: string) => {
   try {
@@ -13,7 +32,7 @@ export const fetchSingleOrder = async (orderId: string) => {
       throw new Error("Failed to connect to the database");
     }
 
-    const order: any = await Order.findOne({ _id: orderId });
+    const order: orderSchemaType | null = await Order.findOne({ _id: orderId });
 
     if (!order) {
       throw new Error("Could not fetch order");
@@ -21,12 +40,14 @@ export const fetchSingleOrder = async (orderId: string) => {
 
     const productsIds = order.productsIds;
 
-    const productsData = [];
+    const productsData: productDataType[] = [];
 
-    // Using Promise.all to handle asynchronous operations inside map
     const products = await Promise.all(
-      productsIds.map(async (obj: any) => {
+      productsIds.map(async (obj) => {
         const productData = await fetchProduct(obj.id);
+        if (!productData) {
+          throw new Error(`Could not fetch product with ID ${obj.id}`);
+        }
         return {
           ...productData,
           size: obj.size,
@@ -47,8 +68,12 @@ export const fetchSingleOrder = async (orderId: string) => {
     });
 
     return productsData;
-  } catch (error: any) {
-    throw new Error(error.message);
+  } catch (error: unknown) {
+    if (typeof error === "object" && error !== null && "message" in error) {
+      throw new Error(` ${error.message}`);
+    } else {
+      throw new Error("Internal Server Error");
+    }
   }
 };
 
@@ -66,8 +91,12 @@ export const fetchOrders = async () => {
     }
 
     return orders;
-  } catch (error: any) {
-    throw new Error(error.message);
+  } catch (error: unknown) {
+    if (typeof error === "object" && error !== null && "message" in error) {
+      throw new Error(` ${error.message}`);
+    } else {
+      throw new Error("Internal Server Error");
+    }
   }
 };
 
@@ -79,9 +108,19 @@ export const updateOrderStatus = async (id: string, status: string) => {
       throw new Error("Failed to connect to the database");
     }
 
-    await Order.findOneAndUpdate({ _id: id }, { status: status });
+    const updatedOrder: orderSchemaType | null = await Order.findOneAndUpdate(
+      { _id: id },
+      { status: status }
+    );
+    if (!updatedOrder) {
+      throw new Error("Could not update order");
+    }
     revalidatePath("/dashboard/orders");
-  } catch (error: any) {
-    throw new Error(error.message);
+  } catch (error: unknown) {
+    if (typeof error === "object" && error !== null && "message" in error) {
+      throw new Error(` ${error.message}`);
+    } else {
+      throw new Error("Internal Server Error");
+    }
   }
 };

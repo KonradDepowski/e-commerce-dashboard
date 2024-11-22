@@ -18,8 +18,12 @@ export const fetchYearOrders = async (year?: Number) => {
       throw new Error("Could not fetch this year orders");
     }
     return thisYearOrders;
-  } catch (error: any) {
-    throw new Error(error.message);
+  } catch (error: unknown) {
+    if (typeof error === "object" && error !== null && "message" in error) {
+      throw new Error(` ${error.message}`);
+    } else {
+      throw new Error("Internal Server Error");
+    }
   }
 };
 
@@ -34,16 +38,29 @@ export const recentSalesHandler = async () => {
       avatar: item.buyerAvatar,
     }));
     return items;
-  } catch (error) {}
+  } catch (error: unknown) {
+    if (typeof error === "object" && error !== null && "message" in error) {
+      throw new Error(` ${error.message}`);
+    }
+  }
 };
 
 export const fetchYearRevenue = async () => {
   try {
     const thisYearOrders = await fetchYearOrders();
+    if (!thisYearOrders) {
+      return;
+    }
     let totalRevenue = 0;
     thisYearOrders.forEach((item) => (totalRevenue += item.totalAmount));
     return totalRevenue;
-  } catch (error) {}
+  } catch (error: unknown) {
+    if (typeof error === "object" && error !== null && "message" in error) {
+      throw new Error(` ${error.message}`);
+    } else {
+      throw new Error("Internal Server Error");
+    }
+  }
 };
 
 export const fetchAllUsersCount = async () => {
@@ -58,8 +75,12 @@ export const fetchAllUsersCount = async () => {
       throw new Error("Could not fetch users");
     }
     return usersCount;
-  } catch (error: any) {
-    throw new Error(error.message);
+  } catch (error: unknown) {
+    if (typeof error === "object" && error !== null && "message" in error) {
+      throw new Error(` ${error.message}`);
+    } else {
+      throw new Error("Internal Server Error");
+    }
   }
 };
 
@@ -75,8 +96,12 @@ export const fetchAllProductsCount = async () => {
       throw new Error("Could not fetch products");
     }
     return productsCount;
-  } catch (error: any) {
-    throw new Error(error.message);
+  } catch (error: unknown) {
+    if (typeof error === "object" && error !== null && "message" in error) {
+      throw new Error(` ${error.message}`);
+    } else {
+      throw new Error("Internal Server Error");
+    }
   }
 };
 
@@ -90,7 +115,13 @@ export const fetchYearSoldProducts = async () => {
       );
     });
     return totalSoldProducts;
-  } catch (error) {}
+  } catch (error: unknown) {
+    if (typeof error === "object" && error !== null && "message" in error) {
+      throw new Error(` ${error.message}`);
+    } else {
+      throw new Error("Internal Server Error");
+    }
+  }
 };
 
 export const fetchMonthRevenue = async (year: Number) => {
@@ -159,7 +190,6 @@ export const fetchMonthRevenue = async (year: Number) => {
 
   try {
     const thisYearOrders = await fetchYearOrders(year);
-
     thisYearOrders.forEach((item) => {
       data.filter((it) => {
         if (it.id === item.createdAt.getMonth()) {
@@ -168,5 +198,11 @@ export const fetchMonthRevenue = async (year: Number) => {
       });
     });
     return data;
-  } catch (error) {}
+  } catch (error: unknown) {
+    if (typeof error === "object" && error !== null && "message" in error) {
+      throw new Error(` ${error.message}`);
+    } else {
+      throw new Error("Internal Server Error");
+    }
+  }
 };

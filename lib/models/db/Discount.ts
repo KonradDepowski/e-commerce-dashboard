@@ -13,7 +13,6 @@ const discountSchema = new Schema({
     required: true,
   },
 });
-mongoose.deleteModel("discount");
 
 export default mongoose.models.discount ||
   mongoose.model("discount", discountSchema);

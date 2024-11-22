@@ -7,7 +7,7 @@ export type userSchemaType = {
   firstName: string;
   lastName: string;
   photo: string;
-  userCart?: Object;
+  userCart?: object;
 };
 
 const userSchema = new Schema({

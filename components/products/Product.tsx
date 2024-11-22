@@ -4,6 +4,10 @@ import Link from "next/link";
 import { productSchemaType } from "@/lib/models/db/Product";
 
 const Product = ({ id, name, price, images, offer }: productSchemaType) => {
+  const image = require("./../../public/product.png");
+
+  const imageUrl = images?.[0] ? images?.[0] : image;
+
   return (
     <Link href={`/dashboard/products/${id}`}>
       <li
@@ -17,7 +21,7 @@ const Product = ({ id, name, price, images, offer }: productSchemaType) => {
         <div className="min-h-[65%] relative ">
           <Image
             className="rounded-lg  object-cover object-center "
-            src={images?.[0]!}
+            src={imageUrl}
             alt={name}
             fill
           />

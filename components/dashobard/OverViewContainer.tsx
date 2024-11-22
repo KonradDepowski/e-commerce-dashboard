@@ -11,14 +11,14 @@ import {
   SelectValue,
 } from "../ui/select";
 
-type RevenueData = {
+export type RevenueData = {
   id: number;
   name: string;
   total: number;
 };
 
 const OverViewContainer = () => {
-  const [monthlyRevenue, setMonthyRevenue] = useState<RevenueData[]>();
+  const [monthlyRevenue, setMonthyRevenue] = useState<RevenueData[]>([]);
   const [year, setYear] = useState<number>(new Date().getFullYear());
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const OverViewContainer = () => {
       try {
         const data = await fetchMonthRevenue(year);
 
-        setMonthyRevenue(data);
+        setMonthyRevenue(data!);
       } catch (error) {
         console.error("Failed to fetch monthly revenue", error);
       }

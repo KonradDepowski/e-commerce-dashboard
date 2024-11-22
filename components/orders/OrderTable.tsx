@@ -26,7 +26,7 @@ import Link from "next/link";
 import { DataTablePagination } from "../orders/data-table-pagination";
 import { DataTableFacetedFilter } from "../orders/data-table-faceted-filter";
 
-export const columns: ColumnDef<Object>[] = [
+export const columns: ColumnDef<object>[] = [
   {
     accessorKey: "_id",
     header: "OrderID",
@@ -66,7 +66,7 @@ export const columns: ColumnDef<Object>[] = [
   },
 ];
 
-export default function OrderTable({ data }: { data: Array<Object> }) {
+export default function OrderTable({ data }: { data: Array<object> }) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []

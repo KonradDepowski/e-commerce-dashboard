@@ -11,7 +11,7 @@ export async function RecentSales() {
   return (
     <div className="space-y-8">
       {recentSales.map((item) => (
-        <div className="flex items-center">
+        <div key={item.email} className="flex items-center">
           <Avatar className="h-9 w-9">
             <AvatarImage src={item.avatar} alt="Avatar" />
             <AvatarFallback>U</AvatarFallback>

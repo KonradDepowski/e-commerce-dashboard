@@ -1,13 +1,6 @@
 import z from "zod";
 const categories = ["lifestyle", "sneakers", "football", "running"] as const;
 const sex = ["unisex", "men", "women"] as const;
-const MAX_FILE_SIZE = 500000;
-const ACCEPTED_IMAGE_TYPES = [
-  "image/jpeg",
-  "image/jpg",
-  "image/png",
-  "image/webp",
-];
 
 export const productSchema = z.object({
   name: z
@@ -19,7 +12,6 @@ export const productSchema = z.object({
   price: z.string().nonempty({ message: "Enter a price" }),
   images: z.any().refine((files) => files, { message: "Image is required." }),
   offer: z.boolean(),
-
 });
 
 export type Product = z.infer<typeof productSchema>;

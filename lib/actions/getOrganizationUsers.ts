@@ -1,4 +1,29 @@
 "use server";
+
+export type OrganizationType = {
+  object: string;
+  id: string;
+  public_metadata: object;
+  private_metadata: object;
+  role: string;
+  role_name: string;
+  permissions: Array<unknown>;
+  createdAt: number;
+  update_at: Number;
+  organization: object;
+  public_user_data: OrganiztionMemebersType;
+};
+export type OrganiztionMemebersType = {
+  first_name: string;
+  last_name: string;
+  image_url: string;
+  has_image: boolean;
+  identifier: string;
+  profile_image_url: string;
+  user_id: string;
+  role: string;
+};
+
 export const getOrganizationUsers = async () => {
   try {
     const response = await fetch(
@@ -12,20 +37,24 @@ export const getOrganizationUsers = async () => {
       }
     );
 
-    const members: any = [];
+    const members: OrganiztionMemebersType[] = [];
 
     if (!response.ok) {
       throw new Error(`Error: ${response.status} ${response.statusText}`);
     }
 
-    const data = await response.json();
+    const data: { data: OrganizationType[] } = await response.json();
 
-    data.data.forEach((it: any) => {
+    data.data.forEach((it) => {
       members.push({ ...it.public_user_data, role: it.role });
     });
 
     return members;
-  } catch (error: any) {
-    throw new Error(`Failed to fetch organization members: ${error.message}`);
+  } catch (error: unknown) {
+    if (typeof error === "object" && error !== null && "message" in error) {
+      throw new Error(`Failed to fetch organization members: ${error.message}`);
+    } else {
+      throw new Error("Internal Server Error");
+    }
   }
 };

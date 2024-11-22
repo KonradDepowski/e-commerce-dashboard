@@ -2,17 +2,18 @@ import { fetchProducts } from "@/lib/actions/product";
 import React from "react";
 import Product from "./Product";
 import PaginationList from "../pagination/Pagination";
+import { productSchemaType } from "@/lib/models/db/Product";
 
 const ProdcutsList = async ({ page }: { page: number | string }) => {
   const { products, totalPages } = await fetchProducts(page, 9);
   if (!products) throw new Error();
   return (
     <>
-      {(await products)?.map((product: any) => (
+      {(await products)?.map((product: productSchemaType) => (
         <Product
           offer={product.offer}
           key={product._id}
-          id={product._id.toString()}
+          id={product._id!.toString()}
           sex={product.sex}
           name={product.name}
           category={product.category}

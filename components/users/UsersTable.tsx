@@ -35,16 +35,18 @@ import { useAuth } from "@clerk/nextjs";
 import { createInvitation } from "@/lib/actions/createInvitation";
 import { deleteUser } from "@/lib/actions/deleteUser";
 import { toast } from "sonner";
+import { OrganiztionMemebersType } from "@/lib/actions/getOrganizationUsers";
 
 const deleteUserHandler = (userId: string) => {
   try {
     deleteUser(userId);
-  } catch (error) {
+  } catch (error: unknown) {
+    console.log(error);
     toast.error("Could not delete user");
   }
 };
 
-export const columns: ColumnDef<Object>[] = [
+export const columns: ColumnDef<object>[] = [
   {
     accessorKey: "image_url",
     header: "Avatar",
@@ -102,7 +104,7 @@ export const columns: ColumnDef<Object>[] = [
     ),
   },
 ];
-const UsersTable = ({ data }: { data: any }) => {
+const UsersTable = ({ data }: { data: OrganiztionMemebersType[] }) => {
   const [email, setEmail] = useState<string>("");
   const { userId } = useAuth();
   const table = useReactTable({

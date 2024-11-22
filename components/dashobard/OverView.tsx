@@ -1,8 +1,9 @@
 "use client";
 
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import { RevenueData } from "./OverViewContainer";
 
-export function Overview({ data }: { data: any }) {
+export function Overview({ data }: { data: RevenueData[] }) {
   return (
     <ResponsiveContainer width="100%" height={350}>
       <BarChart data={data}>
