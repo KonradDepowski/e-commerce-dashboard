@@ -1,6 +1,12 @@
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
 
+export type DiscountType = {
+  _id?: string;
+  code: string;
+  amount: string;
+};
+
 const discountSchema = new Schema({
   code: {
     type: String,

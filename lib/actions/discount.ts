@@ -3,8 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../database/database";
 import Discount from "../models/db/Discount";
-
-import { Discount as DiscountType } from "../models/form/discountSchema";
+import { DiscountType } from "../models/db/Discount";
 
 export const fetchDiscountCodes = async () => {
   try {

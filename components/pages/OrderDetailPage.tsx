@@ -100,12 +100,12 @@ const OrderDetailPage = async ({ params }: { params: { id: string } }) => {
             <ul className="flex flex-col justify-center py-3 items-center gap-3">
               {orderProductInfo.map((order) => (
                 <OrderItemDetails
-                  key={order["0"]._id} // Make sure to add a key prop for each item
-                  id={order["0"]._id}
-                  name={order["0"].name}
-                  image={order["0"].images[0]}
+                  key={order._id}
+                  id={order._id!}
+                  name={order.name}
+                  image={order.images![0]}
                   size={order.size}
-                  price={order["0"].price}
+                  price={order.price}
                   quantity={order.quantity}
                 />
               ))}

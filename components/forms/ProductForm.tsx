@@ -31,8 +31,8 @@ type ProdutFormProps = {
   nameValue: string;
   categoryValue: Category | undefined;
   sexValue: Sex | undefined;
-  priceValue: string;
-  offerValue: boolean;
+  priceValue: number | string;
+  offerValue?: boolean;
   handleProduct: (data: Product, urls: string[]) => Promise<void>;
   deleteImage?: (url: string) => void;
   dbImages?: string[];

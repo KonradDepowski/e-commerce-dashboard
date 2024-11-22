@@ -29,7 +29,7 @@ const DiscountPage = async () => {
               <span className="text-[var(--dark-500)] xl:text-lg">
                 {item.amount}%
               </span>
-              <DeleteDiscount id={item._id} />
+              <DeleteDiscount id={item._id!} />
             </li>
           ))}
         </ul>

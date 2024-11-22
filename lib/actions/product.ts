@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../database/database";
 import Product from "../models/db/Product";
 import { redirect } from "next/navigation";
-import { Product as ProductType } from "../models/form/productSchema";
+import { productSchemaType } from "../models/db/Product";
 
 export const fetchProduct = async (id: string) => {
   try {
@@ -13,7 +13,9 @@ export const fetchProduct = async (id: string) => {
     if (!dbConnection) {
       throw new Error("Failed to connect to the database");
     }
-    const product: ProductType | null = await Product.findOne({ _id: id });
+    const product: productSchemaType | null = await Product.findOne({
+      _id: id,
+    });
     if (!product) {
       throw new Error("Could not fetch all products");
     }
@@ -37,7 +39,7 @@ export const fetchProducts = async (page: string | number, limit: number) => {
     }
     const skipAmount = (Number(page) - 1) * limit;
     const productCount = await Product.countDocuments();
-    const products: ProductType[] = await Product.find()
+    const products: productSchemaType[] = await Product.find()
       .skip(skipAmount)
       .limit(limit);
     if (!products) {
@@ -56,14 +58,14 @@ export const fetchProducts = async (page: string | number, limit: number) => {
   }
 };
 
-export const createProduct = async (data: ProductType) => {
+export const createProduct = async (data: productSchemaType) => {
   try {
     const dbConnection = await connectToDatabase();
 
     if (!dbConnection) {
       throw new Error("Failed to connect to the database");
     }
-    const product: ProductType = await Product.create(data);
+    const product: productSchemaType = await Product.create(data);
     if (!product) {
       throw new Error("Could not fetch all products");
     }
@@ -87,10 +89,8 @@ export const updateOfferProduct = async () => {
       throw new Error("Failed to connect to the database");
     }
 
-    const updatedProduct: ProductType | null = await Product.findOneAndUpdate(
-      { offer: true },
-      { offer: false }
-    );
+    const updatedProduct: productSchemaType | null =
+      await Product.findOneAndUpdate({ offer: true }, { offer: false });
     if (!updatedProduct) {
       throw new Error("Could not update offer product");
     }
@@ -103,17 +103,15 @@ export const updateOfferProduct = async () => {
   }
 };
 
-export const updateProduct = async (data: ProductType, id: string) => {
+export const updateProduct = async (data: productSchemaType, id: string) => {
   try {
     const dbConnection = await connectToDatabase();
 
     if (!dbConnection) {
       throw new Error("Failed to connect to the database");
     }
-    const updatedProduct: ProductType | null = await Product.findOneAndUpdate(
-      { _id: id },
-      data
-    );
+    const updatedProduct: productSchemaType | null =
+      await Product.findOneAndUpdate({ _id: id }, data);
     if (!updatedProduct) {
       throw new Error("Could not update product");
     }

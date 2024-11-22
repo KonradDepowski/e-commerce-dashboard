@@ -6,11 +6,12 @@ import Order, { DeliveryDataType, orderSchemaType } from "../models/db/Order";
 import { fetchProduct } from "./product";
 
 export type productsType = {
+  _id?: string | undefined;
   name: string;
   category: "lifestyle" | "sneakers" | "football" | "running";
   sex: "unisex" | "men" | "women";
-  price: string;
-  offer: boolean;
+  price: number;
+  offer?: boolean | undefined;
   images?: string[];
   size: string;
   quantity: number;

@@ -8,17 +8,18 @@ import React, { useEffect, useState } from "react";
 import ProductForm from "../forms/ProductForm";
 import { Product } from "@/lib/models/form/productSchema";
 import Loader from "../Loader/Loader";
+import { productSchemaType } from "@/lib/models/db/Product";
 
 const UpdateProductPage = ({ params }: { params: { id: string } }) => {
-  const [product, setProduct] = useState<Product | null>(null); // Set initial state to null
+  const [product, setProduct] = useState<productSchemaType | null>(null); // Set initial state to null
   const [images, setImages] = useState<string[]>([]);
 
   useEffect(() => {
     const fetch = async () => {
       try {
         const prd = await fetchProduct(params.id); // Await fetchProduct
-        setProduct(prd[0]);
-        setImages(prd[0].images);
+        setProduct(prd);
+        setImages(prd.images!);
       } catch (error) {
         console.error("Failed to fetch product:", error);
       }
