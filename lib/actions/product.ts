@@ -5,6 +5,7 @@ import { connectToDatabase } from "../database/database";
 import Product from "../models/db/Product";
 import { redirect } from "next/navigation";
 import { productSchemaType } from "../models/db/Product";
+import { log } from "console";
 
 export const fetchProduct = async (id: string) => {
   try {
@@ -13,9 +14,11 @@ export const fetchProduct = async (id: string) => {
     if (!dbConnection) {
       throw new Error("Failed to connect to the database");
     }
-    const product: productSchemaType | null = await Product.findOne({
+
+    const product = await Product.findOne({
       _id: id,
-    });
+    }).lean<productSchemaType>();
+
     if (!product) {
       throw new Error("Could not fetch all products");
     }

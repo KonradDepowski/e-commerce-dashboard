@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 export type OrganizationType = {
   object: string;
   id: string;
@@ -32,7 +34,7 @@ export const getOrganizationUsers = async () => {
         headers: {
           Authorization:
             "Bearer sk_test_iW4n7iDabHVCOhDsU3Z8hatqMuX5e8fqXb1CisUKrO",
-          cache: "no-store",
+          cache: "no-cache",
         },
       }
     );
@@ -56,5 +58,7 @@ export const getOrganizationUsers = async () => {
     } else {
       throw new Error("Internal Server Error");
     }
+  } finally {
+    revalidatePath("/dashboard/users");
   }
 };

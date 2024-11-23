@@ -15,7 +15,7 @@ export const createInvitation = async (
         inviterUserId,
         emailAddress,
         role,
-        redirectUrl: "http://localhost:3000/signup",
+        redirectUrl: "https://e-commerce-dashboard-two-iota.vercel.app/signup",
       });
     if (!response) {
       throw new Error("Could not send invitation");

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -37,9 +37,9 @@ import { deleteUser } from "@/lib/actions/deleteUser";
 import { toast } from "sonner";
 import { OrganiztionMemebersType } from "@/lib/actions/getOrganizationUsers";
 
-const deleteUserHandler = (userId: string) => {
+const deleteUserHandler = async (userId: string) => {
   try {
-    deleteUser(userId);
+    await deleteUser(userId);
   } catch (error: unknown) {
     console.log(error);
     toast.error("Could not delete user");
@@ -115,6 +115,7 @@ const UsersTable = ({ data }: { data: OrganiztionMemebersType[] }) => {
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
   });
+
 
   const sendInvitation = async () => {
     try {

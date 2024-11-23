@@ -11,7 +11,10 @@ const AvatarComponent = () => {
     return <Loader />;
   }
   return (
-    <Link className="flex justify-center items-center" href="/profile">
+    <Link
+      className="flex justify-center items-center"
+      href="/dashboard/profile"
+    >
       <Avatar>
         <AvatarImage src={user.imageUrl} alt="Avatar" />
         <AvatarFallback>U</AvatarFallback>

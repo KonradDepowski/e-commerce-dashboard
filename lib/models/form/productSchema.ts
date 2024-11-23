@@ -10,7 +10,11 @@ export const productSchema = z.object({
   category: z.enum(categories, { message: "Please choose category" }),
   sex: z.enum(sex, { message: "Please choose sex" }),
   price: z.string().nonempty({ message: "Enter a price" }),
-  images: z.any().refine((files) => files, { message: "Image is required." }),
+  images: z
+    .any()
+    .refine((files) => files?.length >= 3, {
+      message: "You need choose min 3 images.",
+    }),
   offer: z.boolean(),
 });
 

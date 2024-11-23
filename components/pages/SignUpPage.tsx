@@ -44,9 +44,6 @@ const SignUpPage = () => {
       </div>
     );
   }
-  if (!user) {
-    return null;
-  }
 
   const handleSubmitHandler = async (data: FormValues) => {
     if (!isLoaded) return;

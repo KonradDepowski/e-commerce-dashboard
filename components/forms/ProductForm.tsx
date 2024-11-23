@@ -120,7 +120,8 @@ const ProductForm = ({
   }, []);
 
   return (
-    <div className="flex justify-center items-center w-full">
+    <div className="flex flex-col justify-center items-center w-full">
+      {isSubmitting && <Loader />}
       <form
         className="w-[80%] max-w-[500px] flex flex-col gap-3"
         onSubmit={handleSubmit(handleSubmitHandler)}
@@ -237,12 +238,12 @@ const ProductForm = ({
           >
             <span className="text-[var(--dark-600)]">Select Images</span>
           </Label>
-          {errors.images && (
-            <p className="text-[var(--error)] text-[10px] sm:text-sm">
-              {errors.images.message as ReactNode}
-            </p>
-          )}
         </div>
+        {errors.images && (
+          <p className="text-[var(--error)] text-[10px] sm:text-sm">
+            {errors.images.message as ReactNode}
+          </p>
+        )}
         <div className="flex flex-wrap gap-2">
           {imageFileUrls.map((url) => (
             <Image
@@ -274,7 +275,7 @@ const ProductForm = ({
           disabled={isSubmitting}
           className="bg-[var(--purple)] hover:bg-[var(--purple-hover)] text-white lg:h-12 lg:text-lg"
         >
-          Create Product
+          {isSubmitting ? "Submitting" : "Create Product"}
         </Button>
       </form>
     </div>

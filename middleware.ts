@@ -9,13 +9,17 @@ export default authMiddleware({
     const url = req.nextUrl.clone();
     const path = url.pathname;
 
-    // Prevent redirect loops by bypassing redirects if already on login or signup
     if (!userId && path === "/signup") {
-      return NextResponse.next(); // Allow access to /signup without redirecting
+      return NextResponse.next();
     }
 
     if (!userId && path !== "/login") {
       url.pathname = "/login";
+      return NextResponse.redirect(url);
+    }
+
+    if (userId && path === "/login" && orgRole === "org:admin") {
+      url.pathname = "/dashboard";
       return NextResponse.redirect(url);
     }
     if (
@@ -36,7 +40,7 @@ export default authMiddleware({
       return NextResponse.redirect(url);
     }
 
-    return NextResponse.next(); // Default to proceed if none of the conditions match
+    return NextResponse.next();
   },
 });
 
