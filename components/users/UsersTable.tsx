@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -115,7 +115,6 @@ const UsersTable = ({ data }: { data: OrganiztionMemebersType[] }) => {
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
   });
-
 
   const sendInvitation = async () => {
     try {

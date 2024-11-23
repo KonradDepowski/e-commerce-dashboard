@@ -5,7 +5,6 @@ import { connectToDatabase } from "../database/database";
 import Product from "../models/db/Product";
 import { redirect } from "next/navigation";
 import { productSchemaType } from "../models/db/Product";
-import { log } from "console";
 
 export const fetchProduct = async (id: string) => {
   try {

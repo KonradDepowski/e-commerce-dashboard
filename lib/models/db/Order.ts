@@ -1,6 +1,5 @@
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
-import { productSchemaType } from "./Product";
 
 export type productsIdsType = {
   id: string;
