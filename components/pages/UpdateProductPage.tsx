@@ -9,7 +9,6 @@ import ProductForm from "../forms/ProductForm";
 import { Product } from "@/lib/models/form/productSchema";
 import Loader from "../Loader/Loader";
 import { productSchemaType } from "@/lib/models/db/Product";
-import DeleteButton from "../buttons/DeleteProductButton";
 
 const UpdateProductPage = ({ params }: { params: { id: string } }) => {
   const [product, setProduct] = useState<productSchemaType | null>(null);

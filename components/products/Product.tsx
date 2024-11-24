@@ -3,8 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { productSchemaType } from "@/lib/models/db/Product";
 import defaultImage from "./../../public/product.png";
-import { deleteProduct } from "@/lib/actions/product";
-import DeleteButton from "../buttons/DeleteProductButton";
 
 const Product = ({ id, name, price, images, offer }: productSchemaType) => {
   const imageUrl = images?.[0] ? images[0] : defaultImage;
