@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { productSchemaType } from "@/lib/models/db/Product";
 import defaultImage from "./../../public/product.png";
+import { deleteProduct } from "@/lib/actions/product";
+import DeleteButton from "../buttons/DeleteProductButton";
 
 const Product = ({ id, name, price, images, offer }: productSchemaType) => {
   const imageUrl = images?.[0] ? images[0] : defaultImage;
@@ -11,7 +13,7 @@ const Product = ({ id, name, price, images, offer }: productSchemaType) => {
     <Link href={`/dashboard/products/${id}`}>
       <li
         key={id}
-        className={`flex flex-col w-[200px] md:w-[250px] lg:w-[280px] bg-primary ${
+        className={`flex flex-col w-[200px] md:w-[250px] lg:w-[280px] bg-primary relative ${
           offer
             ? "border-[var(--green-main)] border shadow-[var(--green-main)] shadow-lg"
             : ""

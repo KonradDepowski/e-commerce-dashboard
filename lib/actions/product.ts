@@ -128,3 +128,26 @@ export const updateProduct = async (data: productSchemaType, id: string) => {
     redirect("/dashboard/products");
   }
 };
+
+export const deleteProduct = async (id: string) => {
+  try {
+    const dbConnection = await connectToDatabase();
+
+    if (!dbConnection) {
+      throw new Error("Failed to connect to the database");
+    }
+    const deleteProduct = await Product.findByIdAndDelete(id);
+    if (!deleteProduct) {
+      throw new Error("Could not delete product");
+    }
+  } catch (error: unknown) {
+    if (typeof error === "object" && error !== null && "message" in error) {
+      throw new Error(` ${error.message}`);
+    } else {
+      throw new Error("Internal Server Error");
+    }
+  } finally {
+    revalidatePath("/dashboard/products");
+    redirect("/dashboard/products");
+  }
+};

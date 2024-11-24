@@ -27,6 +27,7 @@ import { updateProductSchema } from "@/lib/models/form/updateProductSchema";
 import Loader from "../Loader/Loader";
 import ImagesList from "./ImagesList";
 import { Checkbox } from "../ui/checkbox";
+import DeleteButton from "../buttons/DeleteProductButton";
 type ProdutFormProps = {
   nameValue: string;
   categoryValue: Category | undefined;
@@ -36,6 +37,7 @@ type ProdutFormProps = {
   handleProduct: (data: Product, urls: string[]) => Promise<void>;
   deleteImage?: (url: string) => void;
   dbImages?: string[];
+  id: string;
 };
 type Category = "lifestyle" | "sneakers" | "football" | "running";
 type Sex = "unisex" | "men" | "women";
@@ -49,6 +51,7 @@ const ProductForm = ({
   handleProduct,
   deleteImage,
   dbImages,
+  id,
 }: ProdutFormProps) => {
   const [imageFiles, setImageFiles] = useState<FileList | null>(null);
   const [imageFileUrls, setImageFileUrls] = useState<string[]>([]);
@@ -277,6 +280,7 @@ const ProductForm = ({
         >
           {isSubmitting ? "Submitting" : "Create Product"}
         </Button>
+        <DeleteButton productId={id!} />
       </form>
     </div>
   );

@@ -9,6 +9,7 @@ import ProductForm from "../forms/ProductForm";
 import { Product } from "@/lib/models/form/productSchema";
 import Loader from "../Loader/Loader";
 import { productSchemaType } from "@/lib/models/db/Product";
+import DeleteButton from "../buttons/DeleteProductButton";
 
 const UpdateProductPage = ({ params }: { params: { id: string } }) => {
   const [product, setProduct] = useState<productSchemaType | null>(null);
@@ -52,11 +53,13 @@ const UpdateProductPage = ({ params }: { params: { id: string } }) => {
   };
 
   return product ? (
-    <section className="flex flex-col justify-center items-center gap-10 w-full mt-16">
+    <section className="flex flex-col justify-center items-center gap-10 w-full mt-16 relative">
       <h1 className="text-xl text-[var(--green-main)] font-bold lg:text-3xl">
         Edit Product
       </h1>
+
       <ProductForm
+        id={params.id}
         nameValue={product.name}
         categoryValue={product.category}
         sexValue={product.sex}
