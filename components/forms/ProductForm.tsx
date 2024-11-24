@@ -37,7 +37,7 @@ type ProdutFormProps = {
   handleProduct: (data: Product, urls: string[]) => Promise<void>;
   deleteImage?: (url: string) => void;
   dbImages?: string[];
-  id: string;
+  id?: string;
 };
 type Category = "lifestyle" | "sneakers" | "football" | "running";
 type Sex = "unisex" | "men" | "women";
