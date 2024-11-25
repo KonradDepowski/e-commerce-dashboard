@@ -37,7 +37,7 @@ export const recentSalesHandler = async () => {
       totalAmount: item.totalAmount,
       avatar: item.buyerAvatar,
     }));
-    return items;
+    return items.reverse();
   } catch (error: unknown) {
     if (typeof error === "object" && error !== null && "message" in error) {
       throw new Error(` ${error.message}`);

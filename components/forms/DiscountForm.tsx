@@ -33,10 +33,7 @@ const DiscountForm = () => {
       if (typeof error === "object" && error !== null && "message" in error) {
         const er = (error as { message: string }).message;
 
-        if (
-          er.includes("E11000 duplicate key error") &&
-          er.includes("index: code_1")
-        ) {
+        if (er.includes("E11000 duplicate key error")) {
           toast.error(
             "This code is already in use. Please choose a different code"
           );

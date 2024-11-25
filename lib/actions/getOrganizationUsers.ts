@@ -51,7 +51,7 @@ export const getOrganizationUsers = async () => {
       members.push({ ...it.public_user_data, role: it.role });
     });
 
-    return members;
+    return members.reverse();
   } catch (error: unknown) {
     if (typeof error === "object" && error !== null && "message" in error) {
       throw new Error(`Failed to fetch organization members: ${error.message}`);

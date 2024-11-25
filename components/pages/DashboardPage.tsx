@@ -118,7 +118,7 @@ export default async function DashboardPage() {
               </div>
               <div className="grid gap-0 md:gap-4 md:grid-cols-2 lg:grid-cols-7">
                 <OverViewContainer />
-                <Card className="col-span-3 mt-4 md:mt-0">
+                <Card className="col-span-4 md:col-span-3 mt-4 md:mt-0">
                   <CardHeader>
                     <CardTitle>Recent Sales</CardTitle>
                   </CardHeader>

@@ -21,7 +21,7 @@ const ProdcutsList = async ({ page }: { page: number | string }) => {
           price={product.price}
         />
       ))}
-      <div className="absolute bottom-10 right-12">
+      <div className="sm:absolute sm:bottom-2 sm:right-2 lg:bottom-10 lg:right-12">
         {totalPages > 1 && (
           <PaginationList page={page} totalPages={totalPages} />
         )}

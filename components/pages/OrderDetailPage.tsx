@@ -18,73 +18,90 @@ const OrderDetailPage = async ({ params }: { params: { id: string } }) => {
       <GoBackButton />
       <div className=" flex flex-col md:flex-row md:flex-wrap ">
         <div className="py-2 md:w-1/2 md:py-0 ">
-          <h3 className="text-lg font-bold py-1  text-[var(--green-main)] md:w-full xl:text-2xl">
-            Order Info
-          </h3>
-          <p className="flex gap-2 pt-2">
-            <span className="text-[var(--dark-600)] md:text-lg font-bold">
-              Order Id:
-            </span>
-            <span className="text-gray-600 md:text-lg">{orderId}</span>
-          </p>
           <div>
-            <h3 className="text-[var(--dark-600)] md:text-lg font-bold">
-              Delivery Data:
+            <h3 className="text-lg font-bold py-1  text-[var(--green-main)] md:w-full xl:text-2xl">
+              Order Info
             </h3>
+            <p className="flex gap-2 pt-2">
+              <span className="text-[var(--dark-600)] md:text-lg font-bold">
+                Order Id:
+              </span>
+              <span className="text-gray-600 md:text-lg">{orderId}</span>
+            </p>
+
+            <p className="flex  gap-2">
+              <span className="text-[var(--dark-600)]  md:text-lg font-bold">
+                Date:
+              </span>
+              <span className="text-gray-600 md:text-lg">
+                {date.toLocaleDateString()} {""}
+                {date.toLocaleTimeString()}
+              </span>
+            </p>
+            <p className="flex  gap-2">
+              <span className="text-[var(--dark-600)] md:text-lg font-bold">
+                Total Amount:
+              </span>
+              <span className="text-gray-600 md:text-lg">
+                ${order[0].totalAmount}
+              </span>
+            </p>
+          </div>
+          <div>
             <div>
               <div className="flex gap-2  ">
-                <p className="text-gray-600 md:text-lg ">
-                  {order[0].deliveryData.firstName}
-                </p>
-                <p className="text-gray-600 md:text-lg">
-                  {order[0].deliveryData.lastName}
+                <p className="flex  gap-2">
+                  <span className="text-[var(--dark-600)] md:text-lg font-bold">
+                    Full Name:
+                  </span>
+                  <span className="text-gray-600 md:text-lg">
+                    {order[0].deliveryData.firstName}
+                  </span>
+                  <span className="text-gray-600 md:text-lg">
+                    {order[0].deliveryData.lastName}
+                  </span>
                 </p>
               </div>
-
-              <p className="text-gray-600 md:text-lg">
-                {order[0].deliveryData.email}
+              <p className="flex  gap-2">
+                <span className="text-[var(--dark-600)] md:text-lg font-bold">
+                  Phone:
+                </span>
+                <span className="text-gray-600 md:text-lg">
+                  {order[0].deliveryData.phone}
+                </span>
               </p>
-              <p className="text-gray-600 md:text-lg">
-                {order[0].deliveryData.phone}
+              <p className="flex  gap-2">
+                <span className="text-[var(--dark-600)] md:text-lg font-bold">
+                  Country:
+                </span>
+                <span className="text-gray-600 md:text-lg">
+                  {order[0].deliveryData.country}
+                </span>
               </p>
-              <p className="text-gray-600 md:text-lg">
-                {order[0].deliveryData.country}
-              </p>
-              <div className="flex gap-2">
-                <p className="text-gray-600 md:text-lg">
+              <p className="flex  gap-2">
+                <span className="text-[var(--dark-600)] md:text-lg font-bold">
+                  Town:
+                </span>
+                <span className="text-gray-600 md:text-lg">
                   {order[0].deliveryData.postalCode}
-                </p>
-                <p className="text-gray-600 md:text-lg">
+                </span>
+                <span className="text-gray-600 md:text-lg">
                   {order[0].deliveryData.town}
-                </p>
-              </div>
-              <div className="flex gap-2">
-                <p className="text-gray-600 md:text-lg">
+                </span>
+              </p>
+              <p className="flex  gap-2">
+                <span className="text-[var(--dark-600)] md:text-lg font-bold">
+                  Address:
+                </span>
+                <span className="text-gray-600 md:text-lg">
                   {order[0].deliveryData.street}
-                </p>
-                <p className="text-gray-600 md:text-lg">
+                </span>
+                <span className="text-gray-600 md:text-lg">
                   {order[0].deliveryData.houseNumber}
-                </p>
-              </div>
+                </span>
+              </p>
             </div>
           </div>
-          <p className="flex  gap-2">
-            <span className="text-[var(--dark-600)]  md:text-lg font-bold">
-              Date:
-            </span>
-            <span className="text-gray-600 md:text-lg">
-              {date.toLocaleDateString()} {""}
-              {date.toLocaleTimeString()}
-            </span>
-          </p>
-          <p className="flex  gap-2">
-            <span className="text-[var(--dark-600)] md:text-lg font-bold">
-              Total Amount:
-            </span>
-            <span className="text-gray-600 md:text-lg">
-              ${order[0].totalAmount}
-            </span>
-          </p>
           <div className="flex gap-2">
             <span className="text-[var(--dark-600)] md:text-lg font-bold">
               Status:
@@ -92,6 +109,7 @@ const OrderDetailPage = async ({ params }: { params: { id: string } }) => {
             <StatusChange defaultValue={order[0].status} orderId={orderId} />
           </div>
         </div>
+
         <div className="md:w-1/2 max-h-[10vh]">
           <h3 className="text-lg font-bold py-1  text-[var(--green-main)] xl:text-2xl">
             Products Ordered

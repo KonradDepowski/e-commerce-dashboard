@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   Table,
   TableBody,
@@ -46,67 +46,81 @@ const deleteUserHandler = async (userId: string) => {
   }
 };
 
-export const columns: ColumnDef<object>[] = [
-  {
-    accessorKey: "image_url",
-    header: "Avatar",
-    cell: ({ row }) => (
-      <div className="lowercase">
-        {
-          <Image
-            className="rounded-full"
-            src={row.getValue("image_url")}
-            width={30}
-            height={30}
-            alt="logo"
-          />
-        }
-      </div>
-    ),
-  },
-  {
-    accessorKey: "first_name",
-    header: "First Name",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("first_name")}</div>
-    ),
-  },
-  {
-    accessorKey: "last_name",
-    header: "Last Name",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("last_name")}</div>
-    ),
-  },
-
-  {
-    accessorKey: "identifier",
-    header: "E-mail",
-    cell: ({ row }) => (
-      <div className="lowercase">{row.getValue("identifier")}</div>
-    ),
-  },
-  {
-    accessorKey: "role",
-    header: "Role",
-    cell: ({ row }) => <div className="lowercase">{row.getValue("role")}</div>,
-  },
-  {
-    accessorKey: "user_id",
-    header: "Delete",
-    cell: ({ row }) => (
-      <Button
-        onClick={() => deleteUserHandler(row.getValue("user_id"))}
-        className="bg-[var(--error)] hover:bg-[var(--error-hover)]"
-      >
-        Delete
-      </Button>
-    ),
-  },
-];
 const UsersTable = ({ data }: { data: OrganiztionMemebersType[] }) => {
+  const columns: ColumnDef<object>[] = useMemo(
+    () => [
+      {
+        accessorKey: "image_url",
+        header: "Avatar",
+        cell: ({ row }) => (
+          <div className="lowercase">
+            {
+              <Image
+                className="rounded-full"
+                src={row.getValue("image_url")}
+                width={30}
+                height={30}
+                alt="logo"
+              />
+            }
+          </div>
+        ),
+      },
+      {
+        accessorKey: "first_name",
+        header: "First Name",
+        cell: ({ row }) => (
+          <div className="capitalize">{row.getValue("first_name")}</div>
+        ),
+      },
+      {
+        accessorKey: "last_name",
+        header: "Last Name",
+        cell: ({ row }) => (
+          <div className="capitalize">{row.getValue("last_name")}</div>
+        ),
+      },
+
+      {
+        accessorKey: "identifier",
+        header: "E-mail",
+        cell: ({ row }) => (
+          <div className="lowercase">{row.getValue("identifier")}</div>
+        ),
+      },
+      {
+        accessorKey: "role",
+        header: "Role",
+        cell: ({ row }) => (
+          <div className="lowercase">{row.getValue("role")}</div>
+        ),
+      },
+      {
+        accessorKey: "user_id",
+        header: "Delete",
+        cell: ({ row }) => (
+          <div>
+            {userId !== row.getValue("user_id") ? (
+              <Button
+                onClick={() => deleteUserHandler(row.getValue("user_id"))}
+                className="bg-[var(--error)] hover:bg-[var(--error-hover)]"
+              >
+                Delete
+              </Button>
+            ) : (
+              <div className="bg-[var(--purple)]  h-9 px-4 py-2 inline-flex items-center rounded-md">
+                You
+              </div>
+            )}
+          </div>
+        ),
+      },
+    ],
+    [data]
+  );
   const [email, setEmail] = useState<string>("");
   const { userId } = useAuth();
+
   const table = useReactTable({
     data,
     columns,
@@ -117,6 +131,10 @@ const UsersTable = ({ data }: { data: OrganiztionMemebersType[] }) => {
   });
 
   const sendInvitation = async () => {
+    if (email.length <= 0 || !email.includes("@")) {
+      toast.error("Please enter a valid email");
+      return;
+    }
     try {
       await createInvitation(userId!, email);
       toast.success("Invitation send!");
@@ -135,7 +153,7 @@ const UsersTable = ({ data }: { data: OrganiztionMemebersType[] }) => {
             Add New
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] ">
+        <DialogContent className="sm:max-w-[425px] w-[90%]  rounded-lg">
           <DialogHeader>
             <DialogTitle className="text-[var(--green-main)] text-xl">
               Add new User

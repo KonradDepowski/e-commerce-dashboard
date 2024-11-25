@@ -5,6 +5,9 @@ import { connectToDatabase } from "../database/database";
 import Product from "../models/db/Product";
 import { redirect } from "next/navigation";
 import { productSchemaType } from "../models/db/Product";
+import { deleteObject, getStorage, ref } from "@firebase/storage";
+import { app } from "../database/firebase";
+const storage = getStorage(app);
 
 export const fetchProduct = async (id: string) => {
   try {
@@ -136,10 +139,24 @@ export const deleteProduct = async (id: string) => {
     if (!dbConnection) {
       throw new Error("Failed to connect to the database");
     }
-    const deleteProduct = await Product.findByIdAndDelete(id);
+    const deleteProduct: productSchemaType | null =
+      await Product.findByIdAndDelete(id);
+
     if (!deleteProduct) {
       throw new Error("Could not delete product");
     }
+
+    const images = deleteProduct.images;
+    images?.forEach((image) => {
+      const bucketBaseUrl =
+        "https://firebasestorage.googleapis.com/v0/b/e-commerce-c1871.appspot.com/o/";
+      const filePath = decodeURIComponent(
+        image.replace(bucketBaseUrl, "").split("?")[0]
+      );
+      const fileRef = ref(storage, filePath);
+
+      deleteObject(fileRef);
+    });
   } catch (error: unknown) {
     if (typeof error === "object" && error !== null && "message" in error) {
       throw new Error(` ${error.message}`);

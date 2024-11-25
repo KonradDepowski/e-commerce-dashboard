@@ -104,6 +104,7 @@ const ProductForm = ({
       console.error("Error uploading files:", error);
     }
   };
+  const isUpdatedProduct = id ? true : false;
 
   useEffect(() => {
     if (imageFiles) {
@@ -124,164 +125,168 @@ const ProductForm = ({
 
   return (
     <div className="flex flex-col justify-center items-center w-full">
-      {isSubmitting && <Loader />}
-      <form
-        className="w-[80%] max-w-[500px] flex flex-col gap-3"
-        onSubmit={handleSubmit(handleSubmitHandler)}
-      >
-        <div className="">
-          <Label className="sr-only" htmlFor="name">
-            Name
-          </Label>
-          <Input
-            className=""
-            id="name"
-            placeholder="Name"
-            type="text"
-            autoComplete="on"
-            disabled={isSubmitting}
-            defaultValue={nameValue}
-            {...register("name")}
-          />
-          {errors.name && (
-            <p className="text-[var(--error)] text-[10px] sm:text-sm">
-              {errors.name.message}
-            </p>
-          )}
-        </div>
-
-        <div className="flex gap-2 ">
-          <div className="w-1/2">
-            <Select
-              onValueChange={(value: Category) => setValue("category", value)}
-              defaultValue={categoryValue}
-            >
-              <SelectTrigger className="h-12">
-                <SelectValue placeholder="Category" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="lifestyle">Lifestyle</SelectItem>
-                <SelectItem value="sneakers">Sneakers</SelectItem>
-                <SelectItem value="football">Football</SelectItem>
-                <SelectItem value="running">Running</SelectItem>
-              </SelectContent>
-            </Select>
-            {errors.category && (
-              <p className="text-[var(--error)] text-[10px] sm:text-sm">
-                {errors.category.message}
-              </p>
-            )}
-          </div>
-          <div className="w-1/2">
-            <Select
-              defaultValue={sexValue}
-              onValueChange={(value: Sex) => setValue("sex", value)}
-            >
-              <SelectTrigger className="h-12">
-                <SelectValue placeholder="Sex" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="unisex">Unisex</SelectItem>
-                <SelectItem value="men">Men</SelectItem>
-                <SelectItem value="women">Women</SelectItem>
-              </SelectContent>
-            </Select>
-            {errors.sex && (
-              <p className="text-[var(--error)] text-[10px] sm:text-sm">
-                {errors.sex.message}
-              </p>
-            )}
-          </div>
-
-          <div>
+      {isSubmitting ? (
+        <Loader />
+      ) : (
+        <form
+          className="w-[80%] max-w-[500px] flex flex-col gap-3"
+          onSubmit={handleSubmit(handleSubmitHandler)}
+        >
+          <div className="">
+            <Label className="sr-only" htmlFor="name">
+              Name
+            </Label>
             <Input
-              id="price"
-              placeholder="Price"
-              type="number"
+              className=""
+              id="name"
+              placeholder="Name"
+              type="text"
+              autoComplete="on"
               disabled={isSubmitting}
-              {...register("price")}
-              defaultValue={priceValue}
+              defaultValue={nameValue}
+              {...register("name")}
             />
-            {errors.price && (
+            {errors.name && (
               <p className="text-[var(--error)] text-[10px] sm:text-sm">
-                {errors.price.message}
+                {errors.name.message}
               </p>
             )}
           </div>
-        </div>
-        <div className="flex gap-2 items-center">
-          <Checkbox
-            defaultChecked={offerValue}
-            onCheckedChange={(value: boolean) => setValue("offer", value)}
-            className="lg:w-5 lg:h-5"
-            id="offer"
-          />
-          <Label
-            className="text-[var(--dark-600)] lg:text-[16px] "
-            htmlFor="offer "
-          >
-            Deal of the day
-          </Label>
-        </div>
-        <div className="w-full flex ">
-          <Input
-            id="images"
-            className="hidden"
-            type="file"
-            multiple
-            accept="image/*"
-            onChange={(e) => {
-              setValue("images", e.target.files);
-              setImageFiles(e.target.files);
-            }}
-          />
-          <Label
-            className="border-[var(--dark-500)] border w-full flex  items-center px-2 h-9  lg:h-12 rounded-lg cursor-pointer"
-            htmlFor="images"
-          >
-            <span className="text-[var(--dark-600)]">Select Images</span>
-          </Label>
-        </div>
-        {errors.images && (
-          <p className="text-[var(--error)] text-[10px] sm:text-sm">
-            {errors.images.message as ReactNode}
-          </p>
-        )}
-        <div className="flex flex-wrap gap-2">
-          {imageFileUrls.map((url) => (
-            <Image
-              className=" object-contain"
-              key={url}
-              width={100}
-              height={100}
-              src={url}
-              alt="image preview"
-            />
-          ))}
-        </div>
-        {deleteImage && (
-          <div className="flex gap-2 flex-col">
-            <h2 className="text-[var(--dark-600)]">Images from database:</h2>
-            <div className="flex gap-2">
-              <Suspense fallback={<Loader />}>
-                <ImagesList
-                  images={images}
-                  deleteImage={deleteImage}
-                  setImages={setImages}
-                />
-              </Suspense>
+
+          <div className="flex gap-2 ">
+            <div className="w-1/2">
+              <Select
+                onValueChange={(value: Category) => setValue("category", value)}
+                defaultValue={categoryValue}
+              >
+                <SelectTrigger className="h-12">
+                  <SelectValue placeholder="Category" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="lifestyle">Lifestyle</SelectItem>
+                  <SelectItem value="sneakers">Sneakers</SelectItem>
+                  <SelectItem value="football">Football</SelectItem>
+                  <SelectItem value="running">Running</SelectItem>
+                </SelectContent>
+              </Select>
+              {errors.category && (
+                <p className="text-[var(--error)] text-[10px] sm:text-sm">
+                  {errors.category.message}
+                </p>
+              )}
+            </div>
+            <div className="w-1/2">
+              <Select
+                defaultValue={sexValue}
+                onValueChange={(value: Sex) => setValue("sex", value)}
+              >
+                <SelectTrigger className="h-12">
+                  <SelectValue placeholder="Sex" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="unisex">Unisex</SelectItem>
+                  <SelectItem value="men">Men</SelectItem>
+                  <SelectItem value="women">Women</SelectItem>
+                </SelectContent>
+              </Select>
+              {errors.sex && (
+                <p className="text-[var(--error)] text-[10px] sm:text-sm">
+                  {errors.sex.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <Input
+                className="h-12"
+                id="price"
+                placeholder="Price"
+                type="number"
+                disabled={isSubmitting}
+                {...register("price")}
+                defaultValue={priceValue}
+              />
+              {errors.price && (
+                <p className="text-[var(--error)] text-[10px] sm:text-sm">
+                  {errors.price.message}
+                </p>
+              )}
             </div>
           </div>
-        )}
+          <div className="flex gap-2 items-center">
+            <Checkbox
+              defaultChecked={offerValue}
+              onCheckedChange={(value: boolean) => setValue("offer", value)}
+              className="lg:w-5 lg:h-5"
+              id="offer"
+            />
+            <Label
+              className="text-[var(--dark-600)] lg:text-[16px] "
+              htmlFor="offer "
+            >
+              Deal of the day
+            </Label>
+          </div>
+          <div className="w-full flex ">
+            <Input
+              id="images"
+              className="hidden"
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={(e) => {
+                setValue("images", e.target.files);
+                setImageFiles(e.target.files);
+              }}
+            />
+            <Label
+              className="border-[var(--dark-500)] border w-full flex  items-center px-2 h-9  lg:h-12 rounded-lg cursor-pointer"
+              htmlFor="images"
+            >
+              <span className="text-[var(--dark-600)]">Select Images</span>
+            </Label>
+          </div>
+          {errors.images && (
+            <p className="text-[var(--error)] text-[10px] sm:text-sm">
+              {errors.images.message as ReactNode}
+            </p>
+          )}
+          <div className="flex flex-wrap gap-2">
+            {imageFileUrls.map((url) => (
+              <Image
+                className=" object-contain"
+                key={url}
+                width={100}
+                height={100}
+                src={url}
+                alt="image preview"
+              />
+            ))}
+          </div>
+          {deleteImage && (
+            <div className="flex gap-2 flex-col">
+              <h2 className="text-[var(--dark-600)]">Images from database:</h2>
+              <div className="flex gap-2">
+                <Suspense fallback={<Loader />}>
+                  <ImagesList
+                    images={images}
+                    deleteImage={deleteImage}
+                    setImages={setImages}
+                  />
+                </Suspense>
+              </div>
+            </div>
+          )}
 
-        <Button
-          disabled={isSubmitting}
-          className="bg-[var(--purple)] hover:bg-[var(--purple-hover)] text-white lg:h-12 lg:text-lg"
-        >
-          {isSubmitting ? "Submitting" : "Create Product"}
-        </Button>
-        <DeleteButton productId={id!} />
-      </form>
+          <Button
+            disabled={isSubmitting}
+            className="bg-[var(--purple)] hover:bg-[var(--purple-hover)] text-white lg:h-12 lg:text-lg"
+          >
+            {isSubmitting ? "Submitting" : "Create Product"}
+          </Button>
+          {isUpdatedProduct && <DeleteButton productId={id!} />}
+        </form>
+      )}
     </div>
   );
 };
