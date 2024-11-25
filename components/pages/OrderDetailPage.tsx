@@ -10,6 +10,7 @@ const OrderDetailPage = async ({ params }: { params: { id: string } }) => {
   const orderId = params.id;
   const date = order[0].date;
 
+  const discount = order[0].discount !== "" ? `${order[0].discount}%` : "none";
   return (
     <section className="p-3 max-w-[1500px] m-auto md:min-h-[60vh] w-full ">
       <h2 className="text-xl py-2 font-bold md:text-2xl text-center xl:text-3xl xl:pb-8 ">
@@ -45,6 +46,12 @@ const OrderDetailPage = async ({ params }: { params: { id: string } }) => {
               <span className="text-gray-600 md:text-lg">
                 ${order[0].totalAmount}
               </span>
+            </p>
+            <p className="flex  gap-2">
+              <span className="text-[var(--dark-600)] md:text-lg font-bold">
+                Discount
+              </span>
+              <span className="text-gray-600 md:text-lg">{discount}</span>
             </p>
           </div>
           <div>

@@ -15,6 +15,7 @@ export type orderSchemaType = {
   buyerAvatar: string;
   createdAt: Date;
   totalAmount: number;
+  discount: string;
   deliveryData: DeliveryDataType;
   status: string;
 };
@@ -52,6 +53,9 @@ const orderSchema = new Schema({
   },
   totalAmount: {
     type: Number,
+  },
+  discount: {
+    type: String,
   },
   deliveryData: {
     type: Object,

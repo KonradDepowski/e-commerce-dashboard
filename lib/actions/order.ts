@@ -22,6 +22,7 @@ export type productDataType = {
   deliveryData: DeliveryDataType;
   totalAmount: number;
   date: Date;
+  discount: string;
   status: string;
 };
 
@@ -64,6 +65,7 @@ export const fetchSingleOrder = async (orderId: string) => {
       products,
       deliveryData: order.deliveryData,
       totalAmount: order.totalAmount,
+      discount: order.discount,
       date: order.createdAt,
       status: order.status,
     });
