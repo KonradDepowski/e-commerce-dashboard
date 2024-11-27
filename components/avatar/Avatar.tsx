@@ -1,5 +1,4 @@
 "use client";
-
 import { useUser } from "@clerk/nextjs";
 import Loader from "../Loader/Loader";
 import Link from "next/link";

@@ -9,7 +9,7 @@ type ImagesListProps = {
 };
 
 const ImagesList = ({ images, deleteImage, setImages }: ImagesListProps) => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     let loadedImages = 0;
     images.forEach((url) => {

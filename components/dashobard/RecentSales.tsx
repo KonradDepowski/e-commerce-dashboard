@@ -4,13 +4,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 export async function RecentSales() {
   const recentSales = await recentSalesHandler();
 
-  if (!recentSales) {
-    return;
-  }
-
   return (
     <div className="space-y-8">
-      {recentSales.map((item) => (
+      {recentSales?.map((item) => (
         <div key={item.email} className="flex items-center">
           <Avatar className="h-9 w-9">
             <AvatarImage src={item.avatar} alt="Avatar" />

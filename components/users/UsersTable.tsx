@@ -38,12 +38,7 @@ import { toast } from "sonner";
 import { OrganiztionMemebersType } from "@/lib/actions/getOrganizationUsers";
 
 const deleteUserHandler = async (userId: string) => {
-  try {
-    await deleteUser(userId);
-  } catch (error: unknown) {
-    console.log(error);
-    toast.error("Could not delete user");
-  }
+  await deleteUser(userId);
 };
 
 const UsersTable = ({ data }: { data: OrganiztionMemebersType[] }) => {
@@ -103,12 +98,12 @@ const UsersTable = ({ data }: { data: OrganiztionMemebersType[] }) => {
             {userId !== row.getValue("user_id") ? (
               <Button
                 onClick={() => deleteUserHandler(row.getValue("user_id"))}
-                className="bg-[var(--error)] hover:bg-[var(--error-hover)]"
+                className="bg-[var(--error)] hover:bg-[var(--error-hover)] text-white"
               >
                 Delete
               </Button>
             ) : (
-              <div className="bg-[var(--purple)]  h-9 px-4 py-2 inline-flex items-center rounded-md">
+              <div className="bg-[var(--purple)]  h-9 px-4 py-2 inline-flex items-center rounded-md text-white">
                 You
               </div>
             )}
@@ -149,11 +144,11 @@ const UsersTable = ({ data }: { data: OrganiztionMemebersType[] }) => {
     <div className="w-full max-w-[1500px] m-auto flex flex-col ">
       <Dialog>
         <DialogTrigger className="self-end  " asChild>
-          <Button className="bg-[var(--purple)] hover:bg-[var(--purple-hover)]">
+          <Button className="bg-[var(--purple)] hover:bg-[var(--purple-hover)] text-white">
             Add New
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] w-[90%]  rounded-lg">
+        <DialogContent className="sm:max-w-[425px] w-[90%]  rounded-lg bg-primary">
           <DialogHeader>
             <DialogTitle className="text-[var(--green-main)] text-xl">
               Add new User
@@ -176,7 +171,7 @@ const UsersTable = ({ data }: { data: OrganiztionMemebersType[] }) => {
             <DialogClose>
               <Button
                 onClick={() => sendInvitation()}
-                className="bg-[var(--purple)] hover:bg-[var(--purple-hover)]"
+                className="bg-[var(--purple)] hover:bg-[var(--purple-hover)] text-white"
                 type="button"
               >
                 Send

@@ -6,7 +6,6 @@ import { productSchemaType } from "@/lib/models/db/Product";
 
 const ProdcutsList = async ({ page }: { page: number | string }) => {
   const { products, totalPages } = await fetchProducts(page, 9);
-  if (!products) throw new Error();
   return (
     <>
       {(await products)?.map((product: productSchemaType) => (

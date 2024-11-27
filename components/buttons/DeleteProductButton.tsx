@@ -10,7 +10,7 @@ const DeleteButton = ({ productId }: { productId: string }) => {
   return (
     <button
       onClick={() => deleteProductHandler()}
-      className="bg-[var(--error)] lg:h-12 lg:text-lg rounded-lg hover:bg-[var(--error-hover)]"
+      className="bg-[var(--error)] lg:h-12 lg:text-lg rounded-lg hover:bg-[var(--error-hover)] text-white"
     >
       Delete
     </button>

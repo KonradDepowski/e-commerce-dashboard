@@ -10,7 +10,7 @@ const OrderDetailPage = async ({ params }: { params: { id: string } }) => {
   const orderId = params.id;
   const date = order[0].date;
 
-  const discount = order[0].discount !== "" ? `${order[0].discount}%` : "none";
+  const discount = order[0].discount !== "" ? `${order[0].discount}%` : "0%";
   return (
     <section className="p-3 max-w-[1500px] m-auto md:min-h-[60vh] w-full ">
       <h2 className="text-xl py-2 font-bold md:text-2xl text-center xl:text-3xl xl:pb-8 ">

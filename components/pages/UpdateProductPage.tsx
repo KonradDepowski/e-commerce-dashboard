@@ -16,13 +16,9 @@ const UpdateProductPage = ({ params }: { params: { id: string } }) => {
 
   useEffect(() => {
     const fetch = async () => {
-      try {
-        const prd = await fetchProduct(params.id);
-        setProduct(prd);
-        setImages(prd.images!);
-      } catch (error) {
-        console.error("Failed to fetch product:", error);
-      }
+      const prd = await fetchProduct(params.id);
+      setProduct(prd);
+      setImages(prd.images!);
     };
     fetch();
   }, [params.id]);
@@ -36,12 +32,8 @@ const UpdateProductPage = ({ params }: { params: { id: string } }) => {
       offer: data.offer,
     };
 
-    try {
-      if (data.offer) {
-        await updateOfferProduct();
-      }
-    } catch (updateError) {
-      console.error("Failed to update offer product:", updateError);
+    if (data.offer) {
+      await updateOfferProduct();
     }
 
     await updateProduct(productData, params.id);

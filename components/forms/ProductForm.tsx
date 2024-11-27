@@ -97,12 +97,7 @@ const ProductForm = ({
 
       urls = await Promise.all(uploadFiles);
     }
-
-    try {
-      handleProduct(data, urls);
-    } catch (error) {
-      console.error("Error uploading files:", error);
-    }
+    handleProduct(data, urls);
   };
   const isUpdatedProduct = id ? true : false;
 

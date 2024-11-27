@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useAuth } from "@clerk/nextjs";
 
 const NarrowNav = () => {
-  const [openSheet, setOpenSheet] = useState(false);
+  const [openSheet, setOpenSheet] = useState<boolean>(false);
   const { orgRole } = useAuth();
   const admin = orgRole === "org:admin";
   const toogleSheetHandler = () => {

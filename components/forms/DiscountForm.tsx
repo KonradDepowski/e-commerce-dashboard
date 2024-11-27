@@ -37,6 +37,8 @@ const DiscountForm = () => {
           toast.error(
             "This code is already in use. Please choose a different code"
           );
+        } else {
+          toast.error(error.message as string);
         }
       }
     }
@@ -89,7 +91,7 @@ const DiscountForm = () => {
       </div>
 
       <Button
-        className="my-3 mt-5 bg-[var(--purple)] hover:bg-[var(--purple-hover)] xl:w-[200px] xl:h-[40px] text-lg"
+        className="my-3 mt-5 bg-[var(--purple)] hover:bg-[var(--purple-hover)] xl:w-[200px] xl:h-[40px] text-lg text-white"
         type="submit"
       >
         Add Code

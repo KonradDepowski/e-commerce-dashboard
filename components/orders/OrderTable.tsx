@@ -25,7 +25,7 @@ import {
 import Link from "next/link";
 import { DataTablePagination } from "../orders/data-table-pagination";
 import { DataTableFacetedFilter } from "../orders/data-table-faceted-filter";
-
+import { useState } from "react";
 export const columns: ColumnDef<object>[] = [
   {
     accessorKey: "_id",
@@ -67,13 +67,12 @@ export const columns: ColumnDef<object>[] = [
 ];
 
 export default function OrderTable({ data }: { data: Array<object> }) {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = useState({});
 
   const table = useReactTable({
     data,
@@ -121,7 +120,6 @@ export default function OrderTable({ data }: { data: Array<object> }) {
           <TableHeader className="px-7">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow className=" px-7  py-2" key={headerGroup.id}>
-                {/* Adjust padding here */}
                 {headerGroup.headers.map((header) => (
                   <TableHead className="px-5 py-4" key={header.id}>
                     {header.isPlaceholder

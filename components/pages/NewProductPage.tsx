@@ -13,12 +13,8 @@ const NewProductPage = () => {
       offer: data.offer,
     };
 
-    try {
-      if (data.offer) {
-        await updateOfferProduct();
-      }
-    } catch (updateError) {
-      console.error("Failed to update offer product:", updateError);
+    if (data.offer) {
+      await updateOfferProduct();
     }
 
     await createProduct(productData);

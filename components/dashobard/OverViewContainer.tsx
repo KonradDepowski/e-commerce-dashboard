@@ -23,13 +23,8 @@ const OverViewContainer = () => {
 
   useEffect(() => {
     const fetchRevenue = async () => {
-      try {
-        const data = await fetchMonthRevenue(year);
-
-        setMonthyRevenue(data!);
-      } catch (error) {
-        console.error("Failed to fetch monthly revenue", error);
-      }
+      const data = await fetchMonthRevenue(year);
+      setMonthyRevenue(data!);
     };
     fetchRevenue();
   }, [year]);

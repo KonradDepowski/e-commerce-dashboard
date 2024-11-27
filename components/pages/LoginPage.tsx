@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { useRouter } from "next/navigation";
 import { useSignIn, useSignUp } from "@clerk/nextjs";
 import { useForm } from "react-hook-form";
@@ -12,6 +11,7 @@ import { Button } from "../ui/button";
 import { toast } from "sonner";
 import { ThemeToggle } from "../theme/ThemeToggle";
 import Loader from "../Loader/Loader";
+import { useState } from "react";
 
 type FormValues = {
   email: string;
@@ -19,7 +19,7 @@ type FormValues = {
 };
 
 function LoginPage() {
-  const [loading, setLoading] = React.useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const { isLoaded, setActive } = useSignUp();
   const { signIn } = useSignIn();
   const router = useRouter();

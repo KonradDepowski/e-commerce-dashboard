@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 120px; /* Adjust as per the size of the dots */
+  width: 120px;
   margin: 100px auto;
 }
 

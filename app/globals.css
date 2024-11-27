@@ -25,6 +25,7 @@ body {
     --radius: 0.5rem;
     --link-hover-gray: #818587;
     --dark-600: #000000;
+    --dark-400: rgb(53, 53, 53);
     --dark-500: #222a36;
     --dark-300: rgb(187, 187, 187);
     --green-main: #249440;
@@ -38,6 +39,7 @@ body {
     --googleBtn: #dd5144;
     --fbBtn: #4267b2;
     --error: rgb(223, 0, 0);
+    --color: rgb(244, 249, 255);
     --error-hover: rgb(170, 5, 5);
   }
 
@@ -48,6 +50,7 @@ body {
     --link-hover-gray: #94a3b8;
     --dark-600: #f1f5f9ae;
     --dark-500: #f1f5f9ae;
+    --dark-400: #e1e1e1ae;
     --dark-300: rgb(187, 187, 187);
     --font-color: white;
     --blue-hover: rgba(35, 59, 107, 0.8);
