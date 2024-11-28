@@ -38,7 +38,7 @@ const DiscountForm = () => {
             "This code is already in use. Please choose a different code"
           );
         } else {
-          toast.error(error.message as string);
+          toast.error('Internal Server Error');
         }
       }
     }
