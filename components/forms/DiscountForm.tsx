@@ -36,9 +36,9 @@ const DiscountForm = () => {
         if (er.includes("E11000 duplicate key error")) {
           toast.error(
             "This code is already in use. Please choose a different code"
-          );``
+          );
         } else {
-          toast.error('Internal Server Error');
+          toast.error("Internal Server Error");
         }
       }
     }
