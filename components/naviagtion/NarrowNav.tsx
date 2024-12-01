@@ -41,7 +41,7 @@ const NarrowNav = () => {
             </li>
             <li className="  w-full text-xl text-center font-bold uppercase ">
               <Link onClick={toogleSheetHandler} href="/dashboard/discounts">
-                Orders
+                Discounts
               </Link>
             </li>
             {admin && (

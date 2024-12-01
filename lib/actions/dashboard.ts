@@ -127,62 +127,62 @@ export const fetchYearSoldProducts = async () => {
 export const fetchMonthRevenue = async (year: number) => {
   const data = [
     {
-      id: 1,
+      id: 0,
       name: "Jan",
       total: 0,
     },
     {
-      id: 2,
+      id: 1,
       name: "Feb",
       total: 0,
     },
     {
-      id: 3,
+      id: 2,
       name: "Mar",
       total: 0,
     },
     {
-      id: 4,
+      id: 3,
       name: "Apr",
       total: 0,
     },
     {
-      id: 5,
+      id: 4,
       name: "May",
       total: 0,
     },
     {
-      id: 6,
+      id: 5,
       name: "Jun",
       total: 0,
     },
     {
-      id: 7,
+      id: 6,
       name: "Jul",
       total: 0,
     },
     {
-      id: 8,
+      id: 7,
       name: "Aug",
       total: 0,
     },
     {
-      id: 9,
+      id: 8,
       name: "Sep",
       total: 0,
     },
     {
-      id: 10,
+      id: 9,
       name: "Oct",
       total: 0,
     },
     {
-      id: 11,
+      id: 10,
       name: "Nov",
       total: 0,
     },
     {
-      id: 12,
+      id: 11,
       name: "Dec",
       total: 0,
     },
