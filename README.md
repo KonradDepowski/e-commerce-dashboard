@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+## Project Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+I developed a Shop Dashboard designed for efficient product management and order handling.
+* Built with Next.js: Ensures a fast and responsive interface for seamless operations.
+* Authentication via Clerk: Admins can send invitation links to new employees, enabling them to join and manage the shop.
+Admin Capabilities:
+* Modify and manage products easily.
+* Handle orders efficiently.
+* Access shop statistics.
+* View and manage users involved in shop administration.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technologies
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* Next JS
+* Clerk
+* Mongo DB
+* Firebase Storage
+* Shadncn
+* Zod
+* Tailwind
+  
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## Screenshots
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![Screenshot_7](https://github.com/user-attachments/assets/dec23c23-6ea8-48a7-b035-0c30bd37ca3c)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+![Screenshot_8](https://github.com/user-attachments/assets/a4b89407-2194-4773-ad22-abaa738054e5)
 
-## Deploy on Vercel
+![Screenshot_9](https://github.com/user-attachments/assets/f6fb6719-ee44-438c-8296-d6cdf1dbadf2)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![Screenshot_10](https://github.com/user-attachments/assets/648ebc51-5698-49cd-bf0e-111d061ee8a9)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+![Screenshot_11](https://github.com/user-attachments/assets/c00dd9ef-ca88-4742-b6b4-1dce0c09b446)
+
+![Screenshot_12](https://github.com/user-attachments/assets/1c47a702-7e94-4710-9bf1-af222db9ea3f)
+
+![Screenshot_13](https://github.com/user-attachments/assets/14b621c8-8dc3-4a41-8843-cd0695c947b2)
+
+
