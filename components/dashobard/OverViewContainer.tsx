@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Overview } from "./OverView";
 import { fetchMonthRevenue } from "@/lib/actions/dashboard";
 import {
   Select,
@@ -17,17 +17,39 @@ export type RevenueData = {
   total: number;
 };
 
-const OverViewContainer = () => {
-  const [monthlyRevenue, setMonthyRevenue] = useState<RevenueData[]>([]);
-  const [year, setYear] = useState<number>(new Date().getFullYear());
+const Overview = dynamic(
+  () => import("./OverView").then((mod) => mod.Overview),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-[350px] w-full animate-pulse rounded-md bg-muted" />
+    ),
+  },
+);
+
+const OverViewContainer = ({
+  initialData,
+  initialYear,
+}: {
+  initialData: RevenueData[];
+  initialYear: number;
+}) => {
+  const [monthlyRevenue, setMonthyRevenue] =
+    useState<RevenueData[]>(initialData);
+  const [year, setYear] = useState<number>(initialYear);
 
   useEffect(() => {
+    if (year === initialYear && monthlyRevenue.length > 0) {
+      return;
+    }
+
     const fetchRevenue = async () => {
       const data = await fetchMonthRevenue(year);
       setMonthyRevenue(data!);
     };
+
     fetchRevenue();
-  }, [year]);
+  }, [year, initialYear, monthlyRevenue.length]);
 
   return (
     <Card className="col-span-4 relative">

@@ -4,6 +4,7 @@ import { RecentSales } from "../dashobard/RecentSales";
 import {
   fetchAllProductsCount,
   fetchAllUsersCount,
+  fetchMonthRevenue,
   fetchYearRevenue,
   fetchYearSoldProducts,
 } from "@/lib/actions/dashboard";
@@ -11,11 +12,21 @@ import { PiSneakerLight } from "react-icons/pi";
 import OverViewContainer from "../dashobard/OverViewContainer";
 
 export default async function DashboardPage() {
-  const totalRevenue = await fetchYearRevenue();
-  const usersCount = await fetchAllUsersCount();
-  const productsCount = await fetchAllProductsCount();
-  const soldYearProducts = await fetchYearSoldProducts();
   const year = new Date().getFullYear();
+  const [
+    totalRevenue,
+    usersCount,
+    productsCount,
+    soldYearProducts,
+    monthlyRevenue,
+  ] = await Promise.all([
+    fetchYearRevenue(),
+    fetchAllUsersCount(),
+    fetchAllProductsCount(),
+    fetchYearSoldProducts(),
+    fetchMonthRevenue(year),
+  ]);
+
   return (
     <>
       <div className=" flex-col flex ">
@@ -117,7 +128,10 @@ export default async function DashboardPage() {
                 </Card>
               </div>
               <div className="grid gap-0 md:gap-4 md:grid-cols-2 lg:grid-cols-7">
-                <OverViewContainer />
+                <OverViewContainer
+                  initialYear={year}
+                  initialData={monthlyRevenue}
+                />
                 <Card className="col-span-4 md:col-span-3 mt-4 md:mt-0">
                   <CardHeader>
                     <CardTitle>Recent Sales</CardTitle>

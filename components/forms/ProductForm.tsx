@@ -90,7 +90,7 @@ const ProductForm = ({
             async () => {
               const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
               resolve(downloadURL);
-            }
+            },
           );
         });
       });
@@ -104,7 +104,7 @@ const ProductForm = ({
   useEffect(() => {
     if (imageFiles) {
       const newUrls = Array.from(imageFiles).map((file) =>
-        URL.createObjectURL(file)
+        URL.createObjectURL(file),
       );
       setImageFileUrls(newUrls);
 
@@ -115,8 +115,8 @@ const ProductForm = ({
   }, [imageFiles]);
 
   useEffect(() => {
-    setImages(dbImages!);
-  }, []);
+    setImages(dbImages || []);
+  }, [dbImages]);
 
   return (
     <div className="flex flex-col justify-center items-center w-full">

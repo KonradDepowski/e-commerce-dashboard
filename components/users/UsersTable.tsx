@@ -42,6 +42,7 @@ const deleteUserHandler = async (userId: string) => {
 };
 
 const UsersTable = ({ data }: { data: OrganiztionMemebersType[] }) => {
+  const { userId } = useAuth();
   const columns: ColumnDef<object>[] = useMemo(
     () => [
       {
@@ -111,10 +112,9 @@ const UsersTable = ({ data }: { data: OrganiztionMemebersType[] }) => {
         ),
       },
     ],
-    [data]
+    [userId],
   );
   const [email, setEmail] = useState<string>("");
-  const { userId } = useAuth();
 
   const table = useReactTable({
     data,
@@ -192,7 +192,7 @@ const UsersTable = ({ data }: { data: OrganiztionMemebersType[] }) => {
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                   </TableHead>
                 ))}
@@ -210,7 +210,7 @@ const UsersTable = ({ data }: { data: OrganiztionMemebersType[] }) => {
                     <TableCell className="px-5 py-4" key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </TableCell>
                   ))}

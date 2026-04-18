@@ -33,7 +33,7 @@ const SignUpPage = () => {
     if (user?.id) {
       router.push("/dashboard/products");
     }
-  }, [user]);
+  }, [user, router]);
   const token = useSearchParams().get("__clerk_ticket");
   if (!token) {
     return (

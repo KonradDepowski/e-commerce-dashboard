@@ -1,4 +1,5 @@
 import React, { useState, useEffect, SetStateAction, Dispatch } from "react";
+import NextImage from "next/image";
 import Loader from "../Loader/Loader";
 import { FaTrashAlt } from "react-icons/fa";
 
@@ -10,7 +11,13 @@ type ImagesListProps = {
 
 const ImagesList = ({ images, deleteImage, setImages }: ImagesListProps) => {
   const [loading, setLoading] = useState<boolean>(true);
+
   useEffect(() => {
+    if (images.length === 0) {
+      setLoading(false);
+      return;
+    }
+
     let loadedImages = 0;
     images.forEach((url) => {
       const img = new Image();
@@ -30,10 +37,13 @@ const ImagesList = ({ images, deleteImage, setImages }: ImagesListProps) => {
     <div className="flex gap-2 ">
       {images.map((url) => (
         <div key={url} className="relative flex ">
-          <img
+          <NextImage
             className="w-[100px] h-[100px] object-cover"
             src={url}
             alt="Preview"
+            width={100}
+            height={100}
+            sizes="100px"
           />
           {deleteImage && (
             <button

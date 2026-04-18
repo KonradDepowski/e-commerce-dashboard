@@ -1,5 +1,6 @@
 module.exports = {
   images: {
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
         protocol: "https",
@@ -15,5 +16,13 @@ module.exports = {
       },
     ],
   },
-  serverComponentsExternalPackages: ["mongoose"],
+  experimental: {
+    serverComponentsExternalPackages: ["mongoose"],
+    optimizePackageImports: [
+      "react-icons",
+      "lucide-react",
+      "recharts",
+      "@radix-ui/react-icons",
+    ],
+  },
 };
