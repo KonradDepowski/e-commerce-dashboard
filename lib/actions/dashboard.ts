@@ -7,7 +7,7 @@ import Product from "../models/db/Product";
 import User from "../models/db/User";
 
 type YearOrderProjection = {
-  createdAt: Date;
+  createdAt: Date | string | number;
   totalAmount: number;
   productsIds: Array<{ quantity: number }>;
 };
@@ -194,7 +194,16 @@ export const fetchMonthRevenue = async (year: number) => {
   try {
     const thisYearOrders = await fetchYearOrders(year);
     thisYearOrders.forEach((item) => {
-      const monthIndex = item.createdAt.getMonth();
+      const createdAt =
+        item.createdAt instanceof Date
+          ? item.createdAt
+          : new Date(item.createdAt);
+
+      if (Number.isNaN(createdAt.getTime())) {
+        return;
+      }
+
+      const monthIndex = createdAt.getMonth();
       data[monthIndex].total += item.totalAmount;
     });
     return data;
