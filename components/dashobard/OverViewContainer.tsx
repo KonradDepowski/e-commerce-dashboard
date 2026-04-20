@@ -34,6 +34,11 @@ const OverViewContainer = ({
   initialData: RevenueData[];
   initialYear: number;
 }) => {
+  const availableYears = Array.from(
+    { length: 7 },
+    (_, index) => new Date().getFullYear() - index,
+  );
+
   const [monthlyRevenue, setMonthyRevenue] =
     useState<RevenueData[]>(initialData);
   const [year, setYear] = useState<number>(initialYear);
@@ -56,16 +61,19 @@ const OverViewContainer = ({
       <CardHeader>
         <CardTitle className="">
           Overview
-          <Select onValueChange={(value) => setYear(Number(value))}>
+          <Select
+            value={String(year)}
+            onValueChange={(value) => setYear(Number(value))}
+          >
             <SelectTrigger className="h-8  absolute top-2 right-2 w-[80px]">
-              <SelectValue defaultValue={year} placeholder={year} />
+              <SelectValue placeholder={String(year)} />
             </SelectTrigger>
             <SelectContent className="w-[80px]">
-              <SelectItem value="2024">2024</SelectItem>
-              <SelectItem value="2023">2023</SelectItem>
-              <SelectItem value="2022">2022</SelectItem>
-              <SelectItem value="2021">2021</SelectItem>
-              <SelectItem value="2020">2020</SelectItem>
+              {availableYears.map((itemYear) => (
+                <SelectItem key={itemYear} value={String(itemYear)}>
+                  {itemYear}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </CardTitle>
