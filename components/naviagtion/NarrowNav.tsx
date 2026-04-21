@@ -3,13 +3,37 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { ThemeToggle } from "../theme/ThemeToggle";
 import Link from "next/link";
-import { useState } from "react";
-import { useAuth } from "@clerk/nextjs";
+import { useEffect, useMemo, useState } from "react";
+import { useAuth, useOrganizationList } from "@clerk/nextjs";
 
 const NarrowNav = () => {
   const [openSheet, setOpenSheet] = useState<boolean>(false);
-  const { orgRole } = useAuth();
-  const admin = orgRole === "org:admin";
+  const { orgId, orgRole } = useAuth();
+  const { isLoaded, setActive, userMemberships } = useOrganizationList({
+    userMemberships: true,
+  });
+
+  useEffect(() => {
+    if (!isLoaded) return;
+    if (orgId) return;
+
+    const memberships = userMemberships?.data ?? [];
+    if (memberships.length === 1) {
+      void setActive?.({ organization: memberships[0].organization.id });
+    }
+  }, [isLoaded, orgId, setActive, userMemberships?.data]);
+
+  const admin = useMemo(() => {
+    if (orgRole === "org:admin") return true;
+
+    const memberships = userMemberships?.data ?? [];
+    if (orgId) {
+      return memberships.some(
+        (m) => m.organization.id === orgId && m.role === "org:admin",
+      );
+    }
+    return memberships.some((m) => m.role === "org:admin");
+  }, [orgId, orgRole, userMemberships?.data]);
   const toogleSheetHandler = () => {
     setOpenSheet((prev) => !prev);
   };
